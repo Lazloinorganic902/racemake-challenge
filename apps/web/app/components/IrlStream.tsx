@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useCallback, useEffect } from "react";
+import { TrackMap } from "./TrackMap";
 
 interface Frame { ts: number; lap: number; pos: number; spd: number; sector: number }
 interface Sector { lap: number; sector: number; time: number; frames: number; maxSpeed: number; avgThrottle: number }
@@ -130,6 +131,15 @@ export function IrlStream() {
             </button>
           </div>
         </div>
+
+        {/* Track map */}
+        <TrackMap
+          carPos={latestFrame?.pos ?? 0}
+          speed={latestFrame?.spd ?? 0}
+          sector={latestFrame?.sector ?? 1}
+          lap={latestFrame?.lap ?? 0}
+          active={connected}
+        />
 
         {/* Live gauges */}
         {(latestFrame || done) && (
