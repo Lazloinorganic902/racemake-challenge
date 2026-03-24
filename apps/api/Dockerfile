@@ -30,10 +30,10 @@ COPY --from=deps /app/apps/api/node_modules ./apps/api/node_modules
 COPY --from=deps /app/packages/ ./packages/
 COPY . .
 
+# Install tsx globally via npm (pnpm global bin is fiddly in containers)
+RUN npm install -g tsx
+
 ENV PORT=3000
 EXPOSE 3000
-
-# Use tsx to run (Node-compatible)
-RUN pnpm add -g tsx
 
 CMD ["tsx", "apps/api/src/index.ts"]
