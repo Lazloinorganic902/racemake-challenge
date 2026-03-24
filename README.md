@@ -1,3 +1,7 @@
+<table>
+<tr>
+<td>
+
 <p align="center">
   <img src="https://img.shields.io/badge/RACEMAKE-Product_Engineer_Challenge-000?style=for-the-badge" />
 </p>
@@ -19,15 +23,42 @@
   <img src="https://img.shields.io/badge/Exits-3_founded_&_sold-333?style=flat-square" />
 </p>
 
+</td>
+<td width="400">
+
+### Hey Racemake
+
+You won't find a closer fit in Prague than me for this work; I'm working exclusively with gaming tools & reverse engineering across C++, Rust (Tauri mostly) and React. I've made it my mission to ditch boring B2B SaaS clients and follow my passion at the intersect of gaming, AI, and automation.
+
+First up, the important part — your challenges — the basic, the hard, and some extra docs around the "IRL scenario" based on my experience building Game Event API pipelines for Source 2 games: like Counterstrike, Dota, and Deadlock: **[See below]**
+
+**Previous Work**
+
+- **RL platform** — Spins up Counterstrike matches at 20x speed to build complex bots powered by a model that self-improves with an LLM pilot. C++, Rust, Python, React — including Tauri overlays with shared-memory live data.
+  - [s2-framework](https://github.com/dougwithseismic/s2-framework) · [YouTube Demo](https://www.youtube.com/watch?v=Cj94lSUH5io)
+
+- **Reverse engineering tool** — Built to hook into thousands of games and build data pipelines for esports, game assist tools, and patches/mods. Used by the team at [wand.com](https://wand.com) (WeMod) to build out their new LLM game assist coaching features.
+  - [arc-probe](https://github.com/vzco/arc-probe)
+
+**The Challenge** — Give me a racesim game title to buy on Steam, and I'll build from scratch the entire data pipeline, storage, API layer, realtime overlay, and fullstack React app.
+
+**Let's Talk** — The salary makes sense — as long as I'm paying my rent and working on a passion project I care about, you'll be hard pressed to keep me on part-time. (Unpaid is fine). Here's me: [ARES](https://www.finmag.cz/obchodni-rejstrik/ares/10911243-douglas-anthony-silkstone)
+
+Enjoyed the challenge — hope you don't mind I ran with it. Shout me on LinkedIn / call me; don't play this cool :) — **Doug**
+
+</td>
+</tr>
+</table>
+
 ---
 
 ## Important Links
 
 | Resource | URL |
 |---|---|
-| **API Documentation (Scalar)** | [racemake-challenge-production.up.railway.app/docs](https://racemake-challenge-production.up.railway.app/docs) |
-| **Live API Base** | [racemake-challenge-production.up.railway.app](https://racemake-challenge-production.up.railway.app) |
-| **OpenAPI Spec** | [racemake-challenge-production.up.railway.app/openapi.json](https://racemake-challenge-production.up.railway.app/openapi.json) |
+| **API Documentation (Scalar)** | [racemake-challenge.up.railway.app/docs](https://racemake-challenge.up.railway.app/docs) |
+| **Live API Base** | [racemake-challenge.up.railway.app](https://racemake-challenge.up.railway.app) |
+| **OpenAPI Spec** | [racemake-challenge.up.railway.app/openapi.json](https://racemake-challenge.up.railway.app/openapi.json) |
 | **Source Code** | [github.com/dougwithseismic/racemake-challenge](https://github.com/dougwithseismic/racemake-challenge) |
 | **dezlock-dump** (Runtime Schema Extraction) | [github.com/dougwithseismic/dezlock-dump](https://github.com/dougwithseismic/dezlock-dump) |
 | **arc-probe** (AI Process Inspector) | [github.com/vzco/arc-probe](https://github.com/vzco/arc-probe) |
@@ -55,17 +86,17 @@ packages/
 
 ### Live API
 
-**https://racemake-challenge-production.up.railway.app**
+**https://racemake-challenge.up.railway.app**
 
-- **Docs (Scalar):** [/docs](https://racemake-challenge-production.up.railway.app/docs)
-- **Easy — Analyze:** [/api/v2/easy/analyze](https://racemake-challenge-production.up.railway.app/api/v2/easy/analyze)
-- **Easy — Stint:** [/api/v2/easy/stint](https://racemake-challenge-production.up.railway.app/api/v2/easy/stint)
-- **Hard — Laps:** [/api/v2/hard/laps](https://racemake-challenge-production.up.railway.app/api/v2/hard/laps)
-- **Hard — Analysis:** [/api/v2/hard/analysis](https://racemake-challenge-production.up.railway.app/api/v2/hard/analysis)
-- **IRL — Architecture:** [/api/v2/irl](https://racemake-challenge-production.up.railway.app/api/v2/irl)
-- **IRL — Wire Format Codec:** [/api/v2/irl/codec/compare](https://racemake-challenge-production.up.railway.app/api/v2/irl/codec/compare)
-- **IRL — Roundtrip Proof:** [/api/v2/irl/codec/roundtrip](https://racemake-challenge-production.up.railway.app/api/v2/irl/codec/roundtrip)
-- **IRL — SSE Stream:** [/api/v2/irl/stream](https://racemake-challenge-production.up.railway.app/api/v2/irl/stream)
+- **Docs (Scalar):** [/docs](https://racemake-challenge.up.railway.app/docs)
+- **Easy — Analyze:** [/api/v2/easy/analyze](https://racemake-challenge.up.railway.app/api/v2/easy/analyze)
+- **Easy — Stint:** [/api/v2/easy/stint](https://racemake-challenge.up.railway.app/api/v2/easy/stint)
+- **Hard — Laps:** [/api/v2/hard/laps](https://racemake-challenge.up.railway.app/api/v2/hard/laps)
+- **Hard — Analysis:** [/api/v2/hard/analysis](https://racemake-challenge.up.railway.app/api/v2/hard/analysis)
+- **IRL — Architecture:** [/api/v2/irl](https://racemake-challenge.up.railway.app/api/v2/irl)
+- **IRL — Wire Format Codec:** [/api/v2/irl/codec/compare](https://racemake-challenge.up.railway.app/api/v2/irl/codec/compare)
+- **IRL — Roundtrip Proof:** [/api/v2/irl/codec/roundtrip](https://racemake-challenge.up.railway.app/api/v2/irl/codec/roundtrip)
+- **IRL — SSE Stream:** [/api/v2/irl/stream](https://racemake-challenge.up.railway.app/api/v2/irl/stream)
 
 ### Quick Start (Local)
 
@@ -197,38 +228,9 @@ The `/api/v2/irl/codec` routes demonstrate a production alternative:
 
 In production, you'd use Protobuf (which RACEMAKE already does) or FlatBuffers for zero-copy. This is a from-scratch implementation to show the principles.
 
-[Try it live: /api/v2/irl/codec/compare](https://racemake-challenge-production.up.railway.app/api/v2/irl/codec/compare)
+[Try it live: /api/v2/irl/codec/compare](https://racemake-challenge.up.railway.app/api/v2/irl/codec/compare)
 
 ---
-
-## Covering Letter
-
-Hey Racemake — You won't find a closer fit in Prague than me for this work; I'm working exclusively with gaming tools & reverse engineering across C++, Rust (Tauri mostly) and React. I've made it my mission to ditch boring B2B SaaS clients and follow my passion at the intersect of gaming, AI, and automation.
-
-First up, the important part — your challenges — the basic, the hard, and some extra docs around the "IRL scenario" based on my experience building Game Event API pipelines for Source 2 games: like Counterstrike, Dota, and Deadlock: **[See above]**
-
-### Previous Work
-
-- **Reinforcement learning platform** — Spins up Counterstrike matches at 20x speed to build complex bots powered by a model that self-improves with an LLM pilot. C++, Rust, Python, React — has it all; including some Tauri overlays with a shared-memory approach to live data.
-  - Repo: [s2-framework](https://github.com/dougwithseismic/s2-framework)
-  - Video: [YouTube Demo](https://www.youtube.com/watch?v=Cj94lSUH5io)
-
-- **Reverse engineering tool** — Built to hook into thousands of games and build data pipelines for esports, game assist tools, and patches/mods. Used by the team at [wand.com](https://wand.com) (WeMod).
-  - Repo: [arc-probe](https://github.com/vzco/arc-probe)
-
-### The Challenge
-
-I can point to many more examples, but how about this — I challenge you to give me a racesim game title for me to buy on Steam, and I'll build, from scratch, the entire data pipeline, storage, API layer, realtime overlay, and fullstack React app.
-
-### Let's Talk
-
-Or let's just talk ASAP instead; the salary makes sense — as long as I'm paying my rent and working on a passion project I care about, you'll be hard pressed to keep me on part-time. (Unpaid is fine).
-
-Here's me: [ARES](https://www.finmag.cz/obchodni-rejstrik/ares/10911243-douglas-anthony-silkstone)
-
-Enjoyed the challenge — hope you don't mind I ran with it and made it my own. Shout me on LinkedIn / call me; don't play this cool :)
-
-— Doug
 
 ---
 
