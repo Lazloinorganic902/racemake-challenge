@@ -110,28 +110,53 @@ export function getCompletedLaps(filtered: TelemetryFrame[]): Map<number, Teleme
   return completedLaps;
 }
 
+/**
+ * Interpolate the exact timestamp when the car crosses a track position boundary.
+ * At 10Hz sample rates, frames can be ~3s apart — the crossing happens between frames.
+ * Linear interpolation gives a much more accurate sector split than snapping to the
+ * nearest frame, which can be off by up to 1s per boundary.
+ */
+function interpolateBoundaryCrossing(
+  frameBefore: TelemetryFrame,
+  frameAfter: TelemetryFrame,
+  boundaryPos: number
+): number {
+  const posDelta = frameAfter.pos - frameBefore.pos;
+  if (Math.abs(posDelta) < 0.0001) return frameBefore.ts;
+  const fraction = (boundaryPos - frameBefore.pos) / posDelta;
+  return frameBefore.ts + fraction * (frameAfter.ts - frameBefore.ts);
+}
+
 export function computeLapSummary(lapNum: number, lapFrames: TelemetryFrame[]): LapSummary {
   const firstTs = lapFrames[0]!.ts;
   const lastTs = lapFrames[lapFrames.length - 1]!.ts;
   const lapTime = +(lastTs - firstTs).toFixed(3);
 
-  // Sector splits by finding boundary crossings
-  const sectorFrames: TelemetryFrame[][] = [[], [], []];
-  for (const frame of lapFrames) {
-    const sector = getSector(frame.pos);
-    sectorFrames[sector - 1]!.push(frame);
-  }
+  // Find sector boundary crossings by interpolation.
+  // Sector times = time between boundary crossings, not within-sector frame spans.
+  // This ensures S1 + S2 + S3 = lapTime with no inter-sector gaps.
+  let crossS1S2 = firstTs;
+  let crossS2S3 = firstTs;
 
-  const sectors: SectorSummary[] = [];
-  for (let s = 0; s < 3; s++) {
-    const sf = sectorFrames[s]!;
-    if (sf.length >= 2) {
-      const sectorTime = +(sf[sf.length - 1]!.ts - sf[0]!.ts).toFixed(3);
-      sectors.push({ sector: s + 1, time: sectorTime });
-    } else if (sf.length === 1) {
-      sectors.push({ sector: s + 1, time: 0 });
+  for (let i = 1; i < lapFrames.length; i++) {
+    const prev = lapFrames[i - 1]!;
+    const curr = lapFrames[i]!;
+
+    // S1→S2 crossing (pos crosses 0.333)
+    if (prev.pos < S1_S2_BOUNDARY && curr.pos >= S1_S2_BOUNDARY) {
+      crossS1S2 = interpolateBoundaryCrossing(prev, curr, S1_S2_BOUNDARY);
+    }
+    // S2→S3 crossing (pos crosses 0.667)
+    if (prev.pos < S2_S3_BOUNDARY && curr.pos >= S2_S3_BOUNDARY) {
+      crossS2S3 = interpolateBoundaryCrossing(prev, curr, S2_S3_BOUNDARY);
     }
   }
+
+  const sectors: SectorSummary[] = [
+    { sector: 1, time: +(crossS1S2 - firstTs).toFixed(3) },
+    { sector: 2, time: +(crossS2S3 - crossS1S2).toFixed(3) },
+    { sector: 3, time: +(lastTs - crossS2S3).toFixed(3) },
+  ];
 
   // Speed metrics
   const speeds = lapFrames.map((f) => f.spd);
