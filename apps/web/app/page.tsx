@@ -1,5 +1,9 @@
 import { EasyChallenge } from "./components/EasyChallenge";
 import { HardChallenge } from "./components/HardChallenge";
+import { IrlStream } from "./components/IrlStream";
+import { CodecCompare } from "./components/CodecCompare";
+import { CodecPlayground } from "./components/CodecPlayground";
+import { RoundtripProof } from "./components/RoundtripProof";
 
 function Badge({ color, children }: { color: "lime" | "danger" | "warn" | "info"; children: React.ReactNode }) {
   const s: Record<string, string> = {
@@ -169,7 +173,7 @@ export default function Home() {
       {/* ── Architecture ── */}
       <section id="architecture" className="border-b border-border">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
-          <SectionHeader label="Beyond the Challenge" labelColor="text-info" title="Production Architecture" desc="The API includes a working IRL section with streaming telemetry, a binary wire format codec, and a versioned schema registry." />
+          <SectionHeader label="Beyond the Challenge" labelColor="text-info" title="Production Architecture" desc="The API includes a working IRL section with streaming telemetry, a binary wire format codec, and a versioned schema registry. Everything below is interactive — hit the buttons." />
           <ContentGrid>
             {[
               { title: "SSE Streaming", badge: <Badge color="lime">Live</Badge>, desc: "Real-time telemetry replay via Server-Sent Events with incremental sector analysis and coaching at sector boundaries." },
@@ -187,48 +191,24 @@ export default function Home() {
           </ContentGrid>
         </div>
 
-        {/* Wire format table */}
+        {/* Live SSE Stream */}
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 pt-6">
-          <div className="border border-border bg-bg">
-            <CardHeader title="Wire Format — Why JSON Telemetry is Wild" badge={<Badge color="warn">Bandwidth</Badge>} />
-            <div className="overflow-x-auto">
-            <table className="w-full font-mono text-[13px] border-collapse min-w-[500px]">
-              <thead>
-                <tr>
-                  <th className="text-left px-6 py-3 text-[10px] font-semibold tracking-widest uppercase text-t4 border-b border-border">Format</th>
-                  <th className="text-left px-6 py-3 text-[10px] font-semibold tracking-widest uppercase text-t4 border-b border-border">Per Frame</th>
-                  <th className="text-right px-6 py-3 text-[10px] font-semibold tracking-widest uppercase text-t4 border-b border-border">20 Cars @ 120Hz</th>
-                  <th className="text-right px-6 py-3 text-[10px] font-semibold tracking-widest uppercase text-t4 border-b border-border">Reduction</th>
-                </tr>
-              </thead>
-              <tbody className="text-t2">
-                <tr><td className="px-6 py-3 border-b border-border">JSON</td><td className="px-6 py-3 border-b border-border">~131 bytes</td><td className="text-right px-6 py-3 border-b border-border">307 KB/s</td><td className="text-right px-6 py-3 border-b border-border text-t4">—</td></tr>
-                <tr><td className="px-6 py-3 border-b border-border">Binary (v1)</td><td className="px-6 py-3 border-b border-border">19 bytes</td><td className="text-right px-6 py-3 border-b border-border">45 KB/s</td><td className="text-right px-6 py-3 border-b border-border text-lime">85.5%</td></tr>
-                <tr><td className="px-6 py-3">Delta-encoded (v2)</td><td className="px-6 py-3">~6 bytes avg</td><td className="text-right px-6 py-3">~14 KB/s</td><td className="text-right px-6 py-3 text-lime">95.4%</td></tr>
-              </tbody>
-            </table>
-            </div>
-          </div>
-          <p className="text-sm font-light text-t3 leading-relaxed mt-4 max-w-[800px]">
-            Raw JSON at 120Hz repeats field names every frame. In production you&apos;d use Protobuf or FlatBuffers — this is a from-scratch implementation to demonstrate the principles. Versioned schema registry means game patches don&apos;t break consumers.
-          </p>
+          <IrlStream />
         </div>
 
-        {/* API endpoints */}
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 pt-4 pb-12">
-          <div className="border border-border bg-black">
-            <div className="flex justify-between px-4 sm:px-5 py-3 border-b border-border font-mono text-[11px] tracking-wider uppercase text-t4">
-              <span>API Endpoints — IRL</span><span className="hidden sm:inline">Hono + Bun</span>
-            </div>
-            <pre className="p-5 font-mono text-[13px] leading-loose text-t2 overflow-x-auto">
-{`GET  /api/v2/irl               Architecture overview
-GET  /api/v2/irl/stream         SSE real-time telemetry replay
-GET  /api/v2/irl/codec/schemas  Schema registry (v1, v2)
-GET  /api/v2/irl/codec/compare  JSON vs binary vs delta sizes
-GET  /api/v2/irl/codec/roundtrip  Lossless encode → decode proof
-POST /api/v2/irl/codec/encode   JSON → binary (hex)
-POST /api/v2/irl/codec/decode   Binary (hex) → JSON`}</pre>
-          </div>
+        {/* Codec Comparison */}
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 pt-px">
+          <CodecCompare />
+        </div>
+
+        {/* Encode / Decode Playground */}
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 pt-px">
+          <CodecPlayground />
+        </div>
+
+        {/* Roundtrip Proof */}
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 pt-px pb-12">
+          <RoundtripProof />
         </div>
       </section>
 
