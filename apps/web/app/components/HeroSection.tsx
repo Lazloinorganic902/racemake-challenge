@@ -3,7 +3,7 @@
 import { Link } from "lucide-react";
 
 export function HeroSection() {
-  const apiDocsUrl = "/docs";
+  const apiDocsUrl = "https://racemake-challenge-production.up.railway.app/docs";
 
   return (
     <div className="relative z-10 flex-1 flex flex-col justify-between px-5 pt-8 pb-20 md:px-12 md:pt-16 md:pb-36">

@@ -66,7 +66,7 @@ export function Navbar() {
               </a>
             ))}
             <a
-              href="/docs"
+              href="https://racemake-challenge-production.up.railway.app/docs"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setMobileOpen(false)}

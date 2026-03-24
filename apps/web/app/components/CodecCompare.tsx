@@ -25,36 +25,36 @@ export function CodecCompare() {
   const maxBytes = data ? data.sample.jsonBytes : 1;
 
   return (
-    <div className="pb-px">
-      <div className="border border-border bg-bg">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-border">
-          <span className="font-mono text-xs font-semibold tracking-wider uppercase text-t2">Wire Format Comparison</span>
+    <div className="space-y-4">
+      <div className="rounded-2xl border border-neutral-800/50 bg-[#111] overflow-hidden">
+        <div className="flex items-center justify-between px-6 py-5 border-b border-neutral-800/50">
+          <span className="text-sm font-medium text-neutral-300">Wire Format Comparison</span>
           <button onClick={run} disabled={loading}
-            className={`font-mono text-[11px] font-medium tracking-wider uppercase px-4 py-2 border transition-colors ${data ? "border-border bg-bg text-t2 hover:text-t1" : "border-lime bg-lime text-black hover:bg-[#00dd00]"}`}>
+            className={`rounded-full text-xs font-medium tracking-wider uppercase px-5 py-2.5 transition-colors ${data ? "border border-neutral-700 text-neutral-400 hover:text-white" : "bg-white text-black hover:bg-neutral-200"}`}>
             {loading ? "Loading..." : data ? "Hide" : "Run Comparison"}
           </button>
         </div>
 
         {!data && (
           <div className="px-6 py-5">
-            <p className="text-sm font-light text-t2 leading-relaxed">Encode 10 telemetry frames three ways — JSON, fixed binary, delta-encoded — and compare the wire sizes. Calls the live API.</p>
+            <p className="text-sm text-neutral-400 leading-relaxed">Encode 10 telemetry frames three ways — JSON, fixed binary, delta-encoded — and compare the wire sizes. Calls the live API.</p>
           </div>
         )}
 
         {data && (
           <>
             {/* Size bars */}
-            <div className="p-5 flex flex-col gap-3">
+            <div className="p-6 flex flex-col gap-3">
               {[
-                { label: "JSON", bytes: data.sample.jsonBytes, color: "bg-danger", textColor: "text-danger" },
-                { label: "Binary v1", bytes: data.sample.binaryBytes, color: "bg-warn", textColor: "text-warn" },
-                { label: "Delta v2", bytes: data.sample.deltaBytes, color: "bg-lime", textColor: "text-lime" },
+                { label: "JSON", bytes: data.sample.jsonBytes, color: "bg-red-500", textColor: "text-red-400" },
+                { label: "Binary v1", bytes: data.sample.binaryBytes, color: "bg-amber-500", textColor: "text-amber-400" },
+                { label: "Delta v2", bytes: data.sample.deltaBytes, color: "bg-emerald-500", textColor: "text-emerald-400" },
               ].map((row) => (
                 <div key={row.label} className="flex items-center gap-3">
-                  <span className="font-mono text-[10px] tracking-wider text-t4 w-16 shrink-0">{row.label}</span>
-                  <div className="flex-1 h-7 bg-black border border-border overflow-hidden">
+                  <span className="text-[10px] font-medium tracking-wider text-neutral-500 w-16 shrink-0">{row.label}</span>
+                  <div className="flex-1 h-8 bg-[#0a0a0a] rounded-lg overflow-hidden">
                     <div
-                      className={`h-full ${row.color} flex items-center justify-end pr-2 font-mono text-[10px] font-medium text-black transition-all duration-700`}
+                      className={`h-full ${row.color} rounded-lg flex items-center justify-end pr-3 text-[10px] font-semibold text-black transition-all duration-700`}
                       style={{ width: `${Math.max((row.bytes / maxBytes) * 100, 8)}%` }}
                     >
                       {row.bytes}B
@@ -68,42 +68,42 @@ export function CodecCompare() {
             </div>
 
             {/* Production scale */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-border border-t border-border">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-neutral-800/30 border-t border-neutral-800/30">
               {[
-                { v: data.atProductionScale.jsonBandwidth, l: "JSON", c: "text-danger" },
-                { v: data.atProductionScale.binaryBandwidth, l: "Binary", c: "text-warn" },
-                { v: data.atProductionScale.deltaBandwidth, l: "Delta", c: "text-lime" },
-                { v: data.atProductionScale.scenario, l: "Scale", c: "text-t2" },
+                { v: data.atProductionScale.jsonBandwidth, l: "JSON", c: "text-red-400" },
+                { v: data.atProductionScale.binaryBandwidth, l: "Binary", c: "text-amber-400" },
+                { v: data.atProductionScale.deltaBandwidth, l: "Delta", c: "text-emerald-400" },
+                { v: data.atProductionScale.scenario, l: "Scale", c: "text-neutral-300" },
               ].map((s) => (
-                <div key={s.l} className="bg-bg px-5 py-4 text-center">
+                <div key={s.l} className="bg-[#111] px-5 py-5 text-center">
                   <p className={`font-mono text-lg font-semibold tabular-nums mb-1 ${s.c}`}>{s.v}</p>
-                  <p className="font-mono text-[10px] tracking-widest uppercase text-t4">{s.l}</p>
+                  <p className="text-[10px] font-medium tracking-widest uppercase text-neutral-600">{s.l}</p>
                 </div>
               ))}
             </div>
 
             {/* Delta detail */}
             {data.deltaDetail.frames.length > 0 && (
-              <div className="border-t border-border">
-                <div className="px-6 py-2.5 border-b border-border">
-                  <span className="font-mono text-[10px] font-semibold tracking-widest uppercase text-t4">Per-Frame Delta Detail</span>
+              <div className="border-t border-neutral-800/30">
+                <div className="px-6 py-3">
+                  <span className="text-[10px] font-semibold tracking-widest uppercase text-neutral-600">Per-Frame Delta Detail</span>
                 </div>
                 <div className="overflow-x-auto">
                   <table className="w-full font-mono text-[12px] border-collapse min-w-[400px]">
                     <thead>
                       <tr>
                         {["Frame", "Changed", "Bytes", "Unchanged"].map((h, i) => (
-                          <th key={h} className={`${i > 1 ? "text-right" : "text-left"} px-4 sm:px-6 py-2 text-[10px] font-semibold tracking-widest uppercase text-t4 border-b border-border`}>{h}</th>
+                          <th key={h} className={`${i > 1 ? "text-right" : "text-left"} px-6 py-2.5 text-[10px] font-semibold tracking-widest uppercase text-neutral-600 border-b border-neutral-800/50`}>{h}</th>
                         ))}
                       </tr>
                     </thead>
-                    <tbody className="text-t2">
+                    <tbody className="text-neutral-400">
                       {data.deltaDetail.frames.slice(0, 8).map((f) => (
-                        <tr key={f.frame}>
-                          <td className="px-4 sm:px-6 py-2 border-b border-border">{f.frame}</td>
-                          <td className="px-4 sm:px-6 py-2 border-b border-border text-lime">{f.changedFields.join(", ")}</td>
-                          <td className="text-right px-4 sm:px-6 py-2 border-b border-border tabular-nums">{f.bytes}B</td>
-                          <td className="text-right px-4 sm:px-6 py-2 border-b border-border tabular-nums text-t4">{f.unchangedFields}</td>
+                        <tr key={f.frame} className="hover:bg-neutral-800/20 transition-colors">
+                          <td className="px-6 py-2.5 border-b border-neutral-800/30 text-neutral-300">{f.frame}</td>
+                          <td className="px-6 py-2.5 border-b border-neutral-800/30 text-emerald-400">{f.changedFields.join(", ")}</td>
+                          <td className="text-right px-6 py-2.5 border-b border-neutral-800/30 tabular-nums">{f.bytes}B</td>
+                          <td className="text-right px-6 py-2.5 border-b border-neutral-800/30 tabular-nums text-neutral-600">{f.unchangedFields}</td>
                         </tr>
                       ))}
                     </tbody>

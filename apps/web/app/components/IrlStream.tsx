@@ -101,30 +101,30 @@ export function IrlStream({ streamUrl = "/api/v2/irl/stream" }: { streamUrl?: st
   const sectorBar = (pos: number) => {
     const pct = Math.round(pos * 100);
     return (
-      <div className="flex-1 h-1.5 bg-black border border-border overflow-hidden">
-        <div className="h-full bg-lime transition-all duration-100" style={{ width: `${pct}%` }} />
+      <div className="flex-1 h-2 bg-[#0a0a0a] rounded-full overflow-hidden">
+        <div className="h-full bg-emerald-500 rounded-full transition-all duration-100" style={{ width: `${pct}%` }} />
       </div>
     );
   };
 
   return (
-    <div className="pb-px">
-      <div className="border border-border bg-bg">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-border">
-          <span className="font-mono text-xs font-semibold tracking-wider uppercase text-t2">Live Telemetry Stream</span>
+    <div className="space-y-4">
+      <div className="rounded-2xl border border-neutral-800/50 bg-[#111] overflow-hidden">
+        <div className="flex items-center justify-between px-6 py-5 border-b border-neutral-800/50">
+          <span className="text-sm font-medium text-neutral-300">Live Telemetry Stream</span>
           <div className="flex items-center gap-3">
             {connected && (
-              <span className="flex items-center gap-1.5 font-mono text-[10px] tracking-wider text-lime">
-                <span className="w-1.5 h-1.5 rounded-full bg-lime animate-pulse" />
+              <span className="flex items-center gap-2 text-[10px] font-semibold tracking-wider text-emerald-400">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                 LIVE
               </span>
             )}
             <button
               onClick={connected ? disconnect : connect}
-              className={`font-mono text-[11px] font-medium tracking-wider uppercase px-4 py-2 border transition-colors ${
+              className={`rounded-full text-xs font-medium tracking-wider uppercase px-5 py-2.5 transition-colors ${
                 connected
-                  ? "border-danger text-danger hover:bg-danger-dim"
-                  : "border-lime bg-lime text-black hover:bg-[#00dd00]"
+                  ? "border border-red-500/30 text-red-400 hover:bg-red-500/10"
+                  : "bg-white text-black hover:bg-neutral-200"
               }`}
             >
               {connected ? "Disconnect" : done ? "Replay" : "Connect"}
@@ -147,61 +147,61 @@ export function IrlStream({ streamUrl = "/api/v2/irl/stream" }: { streamUrl?: st
 
         {/* Live gauges */}
         {(latestFrame || done) && (
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-border border-b border-border">
-            <div className="bg-bg px-5 py-4 text-center">
-              <p className="font-mono text-xl font-semibold tabular-nums mb-1">{frameCount}</p>
-              <p className="font-mono text-[10px] tracking-widest uppercase text-t4">Frames</p>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-neutral-800/30">
+            <div className="bg-[#111] px-5 py-5 text-center">
+              <p className="font-mono text-xl font-semibold tabular-nums mb-1 text-white">{frameCount}</p>
+              <p className="text-[10px] font-medium tracking-widest uppercase text-neutral-600">Frames</p>
             </div>
-            <div className="bg-bg px-5 py-4 text-center">
-              <p className="font-mono text-xl font-semibold tabular-nums mb-1 text-lime">{laps.length}</p>
-              <p className="font-mono text-[10px] tracking-widest uppercase text-t4">Laps</p>
+            <div className="bg-[#111] px-5 py-5 text-center">
+              <p className="font-mono text-xl font-semibold tabular-nums mb-1 text-emerald-400">{laps.length}</p>
+              <p className="text-[10px] font-medium tracking-widest uppercase text-neutral-600">Laps</p>
             </div>
-            <div className="bg-bg px-5 py-4 text-center">
-              <p className="font-mono text-xl font-semibold tabular-nums mb-1">{latestFrame ? `${latestFrame.spd}` : "—"}<span className="text-sm text-t3"> kph</span></p>
-              <p className="font-mono text-[10px] tracking-widest uppercase text-t4">Speed</p>
+            <div className="bg-[#111] px-5 py-5 text-center">
+              <p className="font-mono text-xl font-semibold tabular-nums mb-1 text-white">{latestFrame ? `${latestFrame.spd}` : "—"}<span className="text-sm text-neutral-500"> kph</span></p>
+              <p className="text-[10px] font-medium tracking-widest uppercase text-neutral-600">Speed</p>
             </div>
-            <div className="bg-bg px-5 py-4 text-center">
-              <p className="font-mono text-xl font-semibold tabular-nums mb-1">S{latestFrame?.sector ?? "—"}</p>
-              <p className="font-mono text-[10px] tracking-widest uppercase text-t4">Sector</p>
+            <div className="bg-[#111] px-5 py-5 text-center">
+              <p className="font-mono text-xl font-semibold tabular-nums mb-1 text-white">S{latestFrame?.sector ?? "—"}</p>
+              <p className="text-[10px] font-medium tracking-widest uppercase text-neutral-600">Sector</p>
             </div>
           </div>
         )}
 
         {/* Track position bar */}
         {latestFrame && connected && (
-          <div className="px-6 py-3 border-b border-border flex items-center gap-3">
-            <span className="font-mono text-[10px] tracking-wider text-t4 shrink-0">POS</span>
+          <div className="px-6 py-4 border-t border-neutral-800/30 flex items-center gap-3">
+            <span className="text-[10px] font-medium tracking-wider text-neutral-500 shrink-0">POS</span>
             {sectorBar(latestFrame.pos)}
-            <span className="font-mono text-[11px] tabular-nums text-t3 shrink-0 w-12 text-right">{(latestFrame.pos * 100).toFixed(1)}%</span>
+            <span className="font-mono text-[11px] tabular-nums text-neutral-400 shrink-0 w-12 text-right">{(latestFrame.pos * 100).toFixed(1)}%</span>
           </div>
         )}
 
         {/* Lap table */}
         {laps.length > 0 && (
-          <div className="border-b border-border overflow-x-auto">
-            <table className="w-full font-mono text-[13px] border-collapse min-w-[500px]">
+          <div className="border-t border-neutral-800/30 overflow-x-auto">
+            <table className="w-full text-[13px] border-collapse min-w-[500px]">
               <thead>
                 <tr>
                   {["Lap", "Time", "S1", "S2", "S3", "Avg", "Max"].map((h, i) => (
-                    <th key={h} className={`${i > 0 ? "text-right" : "text-left"} px-4 sm:px-6 py-2.5 text-[10px] font-semibold tracking-widest uppercase text-t4 border-b border-border`}>{h}</th>
+                    <th key={h} className={`${i > 0 ? "text-right" : "text-left"} px-6 py-3 text-[10px] font-semibold tracking-widest uppercase text-neutral-600 border-b border-neutral-800/50`}>{h}</th>
                   ))}
                 </tr>
               </thead>
-              <tbody className="text-t2">
+              <tbody className="text-neutral-400">
                 {laps.map((lap) => {
                   const best = laps.length > 1 && lap.lapTime === Math.min(...laps.map((l) => l.lapTime));
                   return (
-                    <tr key={lap.lapNumber}>
-                      <td className="px-4 sm:px-6 py-2.5 border-b border-border">
-                        {lap.lapNumber}
-                        {best && <span className="ml-2 font-mono text-[10px] font-semibold tracking-widest uppercase px-2 py-0.5 border text-lime border-lime/20 bg-lime-dim">Best</span>}
+                    <tr key={lap.lapNumber} className="hover:bg-neutral-800/20 transition-colors">
+                      <td className="px-6 py-3 border-b border-neutral-800/30">
+                        <span className="font-medium text-neutral-300">{lap.lapNumber}</span>
+                        {best && <span className="ml-2 rounded-full text-[10px] font-semibold tracking-wider uppercase px-2.5 py-0.5 border border-emerald-500/20 bg-emerald-500/10 text-emerald-400">Best</span>}
                       </td>
-                      <td className={`text-right px-4 sm:px-6 py-2.5 border-b border-border tabular-nums ${best ? "text-lime" : ""}`}>{lap.lapTime.toFixed(3)}s</td>
+                      <td className={`text-right px-6 py-3 border-b border-neutral-800/30 font-mono tabular-nums ${best ? "text-emerald-400" : ""}`}>{lap.lapTime.toFixed(3)}s</td>
                       {lap.sectors.map((s) => (
-                        <td key={s.sector} className="text-right px-4 sm:px-6 py-2.5 border-b border-border tabular-nums">{s.time.toFixed(3)}s</td>
+                        <td key={s.sector} className="text-right px-6 py-3 border-b border-neutral-800/30 font-mono tabular-nums">{s.time.toFixed(3)}s</td>
                       ))}
-                      <td className="text-right px-4 sm:px-6 py-2.5 border-b border-border tabular-nums">{lap.avgSpeed} kph</td>
-                      <td className="text-right px-4 sm:px-6 py-2.5 border-b border-border tabular-nums">{lap.maxSpeed} kph</td>
+                      <td className="text-right px-6 py-3 border-b border-neutral-800/30 font-mono tabular-nums">{lap.avgSpeed} kph</td>
+                      <td className="text-right px-6 py-3 border-b border-neutral-800/30 font-mono tabular-nums">{lap.maxSpeed} kph</td>
                     </tr>
                   );
                 })}
@@ -212,11 +212,11 @@ export function IrlStream({ streamUrl = "/api/v2/irl/stream" }: { streamUrl?: st
 
         {/* Coaching message */}
         {coaching && (
-          <div className="p-5 border-b border-border">
-            <div className="p-5 bg-black border border-border border-l-2 border-l-lime relative italic text-sm font-light text-t2 leading-relaxed">
-              <span className="absolute -top-2.5 left-4 font-mono text-[10px] font-semibold tracking-widest text-lime bg-bg px-2 not-italic uppercase">PitGPT — Live</span>
-              <p className="mb-2">{coaching.coachingMessage}</p>
-              <p className="not-italic font-mono text-[11px] text-t3">
+          <div className="p-6 border-t border-neutral-800/30">
+            <div className="p-5 bg-[#0a0a0a] rounded-xl border border-emerald-500/20 relative">
+              <span className="absolute -top-2.5 left-4 text-[10px] font-semibold tracking-widest text-emerald-400 bg-[#111] px-2 uppercase">PitGPT — Live</span>
+              <p className="italic text-sm text-neutral-400 leading-relaxed mb-2">{coaching.coachingMessage}</p>
+              <p className="font-mono text-[11px] text-neutral-500">
                 Problem: S{coaching.problemSector} — {coaching.issue.replace("_", " ")} — +{coaching.delta.toFixed(3)}s vs best
               </p>
             </div>
@@ -225,39 +225,39 @@ export function IrlStream({ streamUrl = "/api/v2/irl/stream" }: { streamUrl?: st
 
         {/* Event log */}
         {events.length > 0 && (
-          <div className="border-b border-border">
-            <div className="px-6 py-2.5 border-b border-border">
-              <span className="font-mono text-[10px] font-semibold tracking-widest uppercase text-t4">Event Log</span>
+          <div className="border-t border-neutral-800/30">
+            <div className="px-6 py-3">
+              <span className="text-[10px] font-semibold tracking-widest uppercase text-neutral-600">Event Log</span>
             </div>
             <div ref={logRef} className="max-h-48 overflow-y-auto font-mono text-[12px] leading-relaxed">
               {events.map((ev, i) => {
                 let icon = "";
-                let color = "text-t3";
+                let color = "text-neutral-500";
                 let text = "";
                 switch (ev.type) {
                   case "sector":
-                    icon = "◆"; color = "text-t2";
+                    icon = "◆"; color = "text-neutral-400";
                     text = `Lap ${ev.data.lap} S${ev.data.sector} — ${ev.data.time.toFixed(3)}s — max ${ev.data.maxSpeed} kph`;
                     break;
                   case "lap_complete":
-                    icon = "✓"; color = "text-lime";
+                    icon = "✓"; color = "text-emerald-400";
                     text = `Lap ${ev.data.lapNumber} complete — ${ev.data.lapTime.toFixed(3)}s`;
                     break;
                   case "coaching":
-                    icon = "▶"; color = "text-warn";
+                    icon = "▶"; color = "text-amber-400";
                     text = `Coaching: S${ev.data.problemSector} ${ev.data.issue.replace("_", " ")} (+${ev.data.delta.toFixed(3)}s)`;
                     break;
                   case "lap_skipped":
-                    icon = "✕"; color = "text-t4";
+                    icon = "✕"; color = "text-neutral-600";
                     text = `Lap ${ev.data.lap} skipped — ${ev.data.reason}`;
                     break;
                   case "done":
-                    icon = "■"; color = "text-info";
+                    icon = "■"; color = "text-blue-400";
                     text = `Stream complete — ${ev.data.totalLaps} laps processed`;
                     break;
                 }
                 return (
-                  <div key={i} className={`px-6 py-1.5 border-b border-border last:border-b-0 ${color}`}>
+                  <div key={i} className={`px-6 py-1.5 border-b border-neutral-800/20 last:border-b-0 ${color}`}>
                     <span className="inline-block w-4">{icon}</span> {text}
                   </div>
                 );
@@ -268,8 +268,8 @@ export function IrlStream({ streamUrl = "/api/v2/irl/stream" }: { streamUrl?: st
 
         {/* Empty state */}
         {!latestFrame && !done && (
-          <div className="px-6 py-8 text-center">
-            <p className="text-sm font-light text-t3">Connect to stream real-time telemetry from the server. Frames arrive at 20Hz with live sector analysis and coaching.</p>
+          <div className="px-6 py-10 text-center">
+            <p className="text-sm text-neutral-500">Connect to stream real-time telemetry from the server. Frames arrive at 20Hz with live sector analysis and coaching.</p>
           </div>
         )}
       </div>

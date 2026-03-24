@@ -12,41 +12,41 @@ import { RoundtripProof } from "./components/RoundtripProof";
 
 function Badge({ color, children }: { color: "lime" | "danger" | "warn" | "info"; children: React.ReactNode }) {
   const s: Record<string, string> = {
-    lime: "text-lime border-lime/20 bg-lime-dim",
-    danger: "text-danger border-danger/20 bg-danger-dim",
-    warn: "text-warn border-warn/20 bg-warn-dim",
-    info: "text-info border-info/20 bg-info-dim",
+    lime: "text-emerald-400 border-emerald-500/20 bg-emerald-500/10",
+    danger: "text-red-400 border-red-500/20 bg-red-500/10",
+    warn: "text-amber-400 border-amber-500/20 bg-amber-500/10",
+    info: "text-blue-400 border-blue-500/20 bg-blue-500/10",
   };
-  return <span className={`font-mono text-[10px] font-semibold tracking-widest uppercase px-2.5 py-1 border ${s[color]}`}>{children}</span>;
+  return <span className={`rounded-full text-[10px] font-semibold tracking-wider uppercase px-3 py-1 border ${s[color]}`}>{children}</span>;
 }
 
 function GridCard({ title, desc }: { title: string; desc: string }) {
   return (
-    <div className="bg-bg p-6">
-      <p className="font-mono text-[11px] font-semibold tracking-wider uppercase text-t2 mb-2">{title}</p>
-      <p className="text-sm font-light text-t3 leading-relaxed">{desc}</p>
+    <div className="bg-[#111] p-6">
+      <p className="text-[11px] font-semibold tracking-wider uppercase text-neutral-400 mb-2">{title}</p>
+      <p className="text-sm text-neutral-500 leading-relaxed">{desc}</p>
     </div>
   );
 }
 
 function SectionHeader({ label, labelColor, title, desc }: { label: string; labelColor: string; title: string; desc: string }) {
   return (
-    <div className="pt-12 pb-0">
-      <p className={`font-mono text-xs tracking-[0.15em] uppercase ${labelColor} mb-2`}>{label}</p>
-      <h2 className="text-2xl font-normal tracking-tight mb-2">{title}</h2>
-      <p className="text-[15px] font-light text-t2 leading-relaxed max-w-[560px] mb-10">{desc}</p>
+    <div className="pt-16 md:pt-20 pb-0">
+      <p className={`text-xs font-medium tracking-[0.3em] uppercase ${labelColor} mb-3`}>{label}</p>
+      <h2 className="text-3xl md:text-4xl font-light tracking-tight text-white mb-3">{title}</h2>
+      <p className="text-sm md:text-base text-neutral-400 leading-relaxed max-w-[560px] mb-12">{desc}</p>
     </div>
   );
 }
 
 function ContentGrid({ children }: { children: React.ReactNode }) {
-  return <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border border border-border">{children}</div>;
+  return <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-neutral-800/30 rounded-2xl border border-neutral-800/50 overflow-hidden">{children}</div>;
 }
 
 function CardHeader({ title, badge }: { title: string; badge?: React.ReactNode }) {
   return (
-    <div className="flex items-center justify-between px-6 py-4 border-b border-border bg-bg">
-      <span className="font-mono text-xs font-semibold tracking-wider uppercase text-t2">{title}</span>
+    <div className="flex items-center justify-between px-6 py-5 border-b border-neutral-800/50 bg-[#111]">
+      <span className="text-xs font-semibold tracking-wider uppercase text-neutral-400">{title}</span>
       {badge}
     </div>
   );
@@ -54,13 +54,13 @@ function CardHeader({ title, badge }: { title: string; badge?: React.ReactNode }
 
 function PipelineStep({ num, title, desc, done }: { num: number; title: string; desc: string; done?: boolean }) {
   return (
-    <div className="flex gap-4 items-start py-4 border-b border-border last:border-b-0">
-      <div className={`w-7 h-7 flex items-center justify-center font-mono text-xs font-semibold shrink-0 ${done ? "border border-lime bg-lime text-black" : "border border-border text-t4"}`}>
+    <div className="flex gap-4 items-start py-4 border-b border-neutral-800/30 last:border-b-0">
+      <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-semibold shrink-0 ${done ? "bg-emerald-500 text-black" : "border border-neutral-700 text-neutral-600"}`}>
         {done ? "✓" : num}
       </div>
       <div className="min-w-0">
-        <p className="font-mono text-[13px] font-medium mb-0.5">{title}</p>
-        <p className="text-sm text-t3">{desc}</p>
+        <p className="font-mono text-[13px] font-medium mb-0.5 text-neutral-300">{title}</p>
+        <p className="text-sm text-neutral-500">{desc}</p>
       </div>
     </div>
   );
@@ -108,7 +108,7 @@ const projects = [
   {
     name: "arc-probe", subtitle: "AI-Agent Process Inspector",
     badges: [["Rust", "warn"], ["React", "info"]] as [string, "warn" | "info"][],
-    desc: <>Built to hook into thousands of games and build data pipelines for esports, game assist tools, and patches/mods. DLL injection, disassembly, and struct mapping — all controllable via AI agent skills. Tauri v2 app. Used by the team at <a href="https://wand.com" target="_blank" rel="noopener noreferrer" className="text-t1 border-b border-border-hover">wand.com</a> (WeMod).</>,
+    desc: <>Built to hook into thousands of games and build data pipelines for esports, game assist tools, and patches/mods. DLL injection, disassembly, and struct mapping — all controllable via AI agent skills. Tauri v2 app. Used by the team at <a href="https://wand.com" target="_blank" rel="noopener noreferrer" className="text-white border-b border-neutral-600 hover:border-neutral-400 transition-colors">wand.com</a> (WeMod).</>,
     links: [{ label: "Source Code", url: "https://github.com/vzco/arc-probe" }],
   },
   {
@@ -118,6 +118,8 @@ const projects = [
     links: [{ label: "Source Code", url: "https://github.com/dougwithseismic/dezlock-dump" }],
   },
 ];
+
+const API_DOCS_URL = "https://racemake-challenge-production.up.railway.app/docs";
 
 export default function Home() {
   const apiUrl = process.env.API_URL || "";
@@ -159,16 +161,16 @@ export default function Home() {
       {/* ── INSIGHTS (Tabbed) ── */}
       <InsightsSection />
 
-      {/* ── CHALLENGE SECTIONS (dark theme) ── */}
+      {/* ── CHALLENGE SECTIONS ── */}
       <div style={{ backgroundColor: "#0F0F0F" }}>
         {/* ── Challenge 1 ── */}
-        <section id="easy" className="border-b border-border">
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
-            <SectionHeader label="Challenge 1 — Easy" labelColor="text-lime" title="Telemetry Analysis Pipeline" desc="Sector-level analysis comparing driver laps against a reference. Three levels: fix a bug, extend to stint analysis, think about scale." />
+        <section id="easy" className="border-b border-neutral-800/30">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-8">
+            <SectionHeader label="Challenge 1 — Easy" labelColor="text-emerald-400" title="Telemetry Analysis Pipeline" desc="Sector-level analysis comparing driver laps against a reference. Three levels: fix a bug, extend to stint analysis, think about scale." />
             <EasyChallenge />
           </div>
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 pb-12 mt-px">
-            <div className="border border-border border-b-0 bg-bg">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-8 pb-16 mt-4">
+            <div className="rounded-t-2xl border border-b-0 border-neutral-800/50 bg-[#111]">
               <CardHeader title="Level 3 — What breaks at scale" badge={<Badge color="info">Architecture</Badge>} />
             </div>
             <ContentGrid>{archItems.map((i) => <GridCard key={i.title} {...i} />)}</ContentGrid>
@@ -176,80 +178,80 @@ export default function Home() {
         </section>
 
         {/* ── Challenge 2 ── */}
-        <section id="hard" className="border-b border-border">
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
-            <SectionHeader label="Challenge 2 — Hard" labelColor="text-warn" title="Raw Telemetry API" desc="Three API endpoints from raw 10Hz telemetry. Ingest, compute lap summaries with sector splits, generate coaching — handling edge cases." />
+        <section id="hard" className="border-b border-neutral-800/30">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-8">
+            <SectionHeader label="Challenge 2 — Hard" labelColor="text-amber-400" title="Raw Telemetry API" desc="Three API endpoints from raw 10Hz telemetry. Ingest, compute lap summaries with sector splits, generate coaching — handling edge cases." />
             <HardChallenge />
           </div>
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 pb-12 mt-px">
-            <div className="border border-border border-b-0 bg-bg">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-8 pb-16 mt-4">
+            <div className="rounded-t-2xl border border-b-0 border-neutral-800/50 bg-[#111]">
               <CardHeader title="Implementation" />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border border border-border border-t-0">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-neutral-800/30 rounded-b-2xl border border-neutral-800/50 border-t-0 overflow-hidden">
               {implItems.map((i) => <GridCard key={i.title} {...i} />)}
             </div>
           </div>
         </section>
 
         {/* ── Architecture ── */}
-        <section id="architecture" className="border-b border-border">
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
-            <SectionHeader label="Beyond the Challenge" labelColor="text-info" title="Production Architecture" desc="The API includes a working IRL section with streaming telemetry, a binary wire format codec, and a versioned schema registry. Everything below is interactive — hit the buttons." />
+        <section id="architecture" className="border-b border-neutral-800/30">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-8">
+            <SectionHeader label="Beyond the Challenge" labelColor="text-blue-400" title="Production Architecture" desc="The API includes a working IRL section with streaming telemetry, a binary wire format codec, and a versioned schema registry. Everything below is interactive — hit the buttons." />
             <ContentGrid>
               {[
                 { title: "SSE Streaming", badge: <Badge color="lime">Live</Badge>, desc: "Real-time telemetry replay via Server-Sent Events with incremental sector analysis and coaching at sector boundaries." },
                 { title: "Binary Codec", badge: <Badge color="warn">v1 + v2</Badge>, desc: "v1: fixed 19-byte frames vs ~131 bytes JSON — 85% reduction. v2: delta-encoded at ~6 bytes avg. Lossless roundtrip." },
                 { title: "Schema Registry", badge: <Badge color="info">Versioned</Badge>, desc: "Runtime schema extraction maps telemetry fields to binary positions. Forward-compatible — new fields don't break old decoders." },
               ].map((i) => (
-                <div key={i.title} className="bg-bg p-6">
+                <div key={i.title} className="bg-[#111] p-6">
                   <div className="flex items-center justify-between mb-3">
-                    <p className="font-mono text-[11px] font-semibold tracking-wider uppercase text-t2">{i.title}</p>
+                    <p className="text-[11px] font-semibold tracking-wider uppercase text-neutral-400">{i.title}</p>
                     {i.badge}
                   </div>
-                  <p className="text-sm font-light text-t3 leading-relaxed">{i.desc}</p>
+                  <p className="text-sm text-neutral-500 leading-relaxed">{i.desc}</p>
                 </div>
               ))}
             </ContentGrid>
           </div>
 
           {/* Live SSE Stream */}
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 pt-6">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-8 pt-6">
             <IrlStream streamUrl={streamUrl} />
           </div>
 
           {/* Codec Comparison */}
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 pt-px">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-8 pt-4">
             <CodecCompare />
           </div>
 
           {/* Encode / Decode Playground */}
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 pt-px">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-8 pt-4">
             <CodecPlayground />
           </div>
 
           {/* Roundtrip Proof */}
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 pt-px pb-12">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-8 pt-4 pb-16">
             <RoundtripProof />
           </div>
         </section>
 
         {/* ── IRL: Reverse Engineering ── */}
-        <section id="irl" className="border-b border-border">
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
-            <SectionHeader label="IRL Challenge" labelColor="text-lime" title="Reverse Engineering & Telemetry Pipelines" desc='The job listing says "debug and fix telemetry format changes from game updates rapidly." Here&apos;s how I&apos;d actually do it — and have been doing it.' />
+        <section id="irl" className="border-b border-neutral-800/30">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-8">
+            <SectionHeader label="IRL Challenge" labelColor="text-emerald-400" title="Reverse Engineering & Telemetry Pipelines" desc='The job listing says "debug and fix telemetry format changes from game updates rapidly." Here&apos;s how I&apos;d actually do it — and have been doing it.' />
           </div>
 
           {/* Problem / Solution */}
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
-            <div className="border border-border bg-bg p-6 mb-6">
-              <p className="font-mono text-[11px] font-semibold tracking-wider uppercase text-t4 mb-3">The Problem</p>
-              <p className="text-sm font-light text-t2 leading-relaxed">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-8 space-y-4">
+            <div className="rounded-2xl border border-neutral-800/50 bg-[#111] p-6">
+              <p className="text-[11px] font-semibold tracking-wider uppercase text-neutral-600 mb-3">The Problem</p>
+              <p className="text-sm text-neutral-400 leading-relaxed">
                 Sim racing telemetry is extracted from game memory or APIs. When the game patches, offsets shift, structs change, and your pipeline breaks. The community waits for someone to reverse-engineer the new offsets. That wait kills your product.
               </p>
             </div>
-            <div className="border border-border bg-bg p-6">
-              <p className="font-mono text-[11px] font-semibold tracking-wider uppercase text-lime mb-3">The Solution: Runtime Schema Extraction</p>
-              <p className="text-sm font-light text-t2 leading-relaxed mb-5">
+            <div className="rounded-2xl border border-neutral-800/50 bg-[#111] p-6">
+              <p className="text-[11px] font-semibold tracking-wider uppercase text-emerald-400 mb-3">The Solution: Runtime Schema Extraction</p>
+              <p className="text-sm text-neutral-400 leading-relaxed mb-5">
                 I built this exact system for Source 2 games. Instead of hardcoding offsets that break every patch:
               </p>
               <div className="flex flex-col">
@@ -262,12 +264,12 @@ export default function Home() {
           </div>
 
           {/* Applied to racing */}
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 pt-6">
-            <div className="border border-border bg-black">
-              <div className="flex justify-between px-5 py-3 border-b border-border font-mono text-[11px] tracking-wider uppercase text-t4">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-8 pt-6">
+            <div className="rounded-t-2xl border border-neutral-800/50 bg-[#0a0a0a] overflow-hidden">
+              <div className="flex justify-between px-6 py-3.5 border-b border-neutral-800/30 text-[11px] tracking-wider uppercase text-neutral-500">
                 <span>Applied to Racing Telemetry</span><span>Same Pattern</span>
               </div>
-              <pre className="p-5 font-mono text-[13px] text-lime overflow-x-auto">
+              <pre className="p-6 font-mono text-[13px] text-emerald-400 overflow-x-auto">
 {`Game Process → DLL Injection → Schema Extraction → Typed SDK → Telemetry Pipeline → Analysis`}</pre>
             </div>
             <ContentGrid>
@@ -278,24 +280,24 @@ export default function Home() {
           </div>
 
           {/* Tooling table */}
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 pt-6">
-            <div className="border border-border bg-bg">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-8 pt-6">
+            <div className="rounded-2xl border border-neutral-800/50 bg-[#111] overflow-hidden">
               <CardHeader title="Tooling — Built from scratch" badge={<Badge color="lime">Open Source</Badge>} />
               <div className="overflow-x-auto">
-              <table className="w-full font-mono text-[13px] border-collapse min-w-[500px]">
+              <table className="w-full text-[13px] border-collapse min-w-[500px]">
                 <thead>
                   <tr>
-                    <th className="text-left px-6 py-3 text-[10px] font-semibold tracking-widest uppercase text-t4 border-b border-border">Tool</th>
-                    <th className="text-left px-6 py-3 text-[10px] font-semibold tracking-widest uppercase text-t4 border-b border-border">What it does</th>
-                    <th className="text-left px-6 py-3 text-[10px] font-semibold tracking-widest uppercase text-t4 border-b border-border">Link</th>
+                    <th className="text-left px-6 py-3.5 text-[10px] font-semibold tracking-widest uppercase text-neutral-600 border-b border-neutral-800/50">Tool</th>
+                    <th className="text-left px-6 py-3.5 text-[10px] font-semibold tracking-widest uppercase text-neutral-600 border-b border-neutral-800/50">What it does</th>
+                    <th className="text-left px-6 py-3.5 text-[10px] font-semibold tracking-widest uppercase text-neutral-600 border-b border-neutral-800/50">Link</th>
                   </tr>
                 </thead>
-                <tbody className="text-t2">
+                <tbody className="text-neutral-400">
                   {tools.map((t) => (
-                    <tr key={t.name}>
-                      <td className="px-6 py-3 border-b border-border text-t1 font-medium">{t.name}</td>
-                      <td className="px-6 py-3 border-b border-border">{t.desc}</td>
-                      <td className="px-6 py-3 border-b border-border"><a href={t.url} target="_blank" rel="noopener noreferrer" className="text-lime hover:underline">GitHub</a></td>
+                    <tr key={t.name} className="hover:bg-neutral-800/20 transition-colors">
+                      <td className="px-6 py-3.5 border-b border-neutral-800/30 text-white font-medium">{t.name}</td>
+                      <td className="px-6 py-3.5 border-b border-neutral-800/30">{t.desc}</td>
+                      <td className="px-6 py-3.5 border-b border-neutral-800/30"><a href={t.url} target="_blank" rel="noopener noreferrer" className="text-emerald-400 hover:underline">GitHub</a></td>
                     </tr>
                   ))}
                 </tbody>
@@ -305,8 +307,8 @@ export default function Home() {
           </div>
 
           {/* Optimal Approaches */}
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 pt-6 pb-12">
-            <div className="border border-border border-b-0 bg-bg">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-8 pt-6 pb-16">
+            <div className="rounded-t-2xl border border-b-0 border-neutral-800/50 bg-[#111]">
               <CardHeader title="Optimal Approaches" badge={<Badge color="info">Production</Badge>} />
             </div>
             <ContentGrid>{optimalApproaches.map((i) => <GridCard key={i.title} {...i} />)}</ContentGrid>
@@ -314,28 +316,28 @@ export default function Home() {
         </section>
 
         {/* ── Portfolio ── */}
-        <section id="portfolio" className="border-b border-border">
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
-            <SectionHeader label="Previous Work" labelColor="text-warn" title="Relevant Projects" desc="Gaming tools, reverse engineering, and AI — the intersection where I've been building for the last few years." />
+        <section id="portfolio" className="border-b border-neutral-800/30">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-8">
+            <SectionHeader label="Previous Work" labelColor="text-amber-400" title="Relevant Projects" desc="Gaming tools, reverse engineering, and AI — the intersection where I've been building for the last few years." />
           </div>
 
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 pb-12">
-            <div className="flex flex-col gap-px bg-border border border-border">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-8 pb-16">
+            <div className="flex flex-col gap-4">
               {projects.map((p) => (
-                <div key={p.name} className="bg-bg">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between px-4 sm:px-6 py-4 border-b border-border gap-2">
+                <div key={p.name} className="rounded-2xl border border-neutral-800/50 bg-[#111] overflow-hidden">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between px-6 py-5 border-b border-neutral-800/30 gap-2">
                     <div>
-                      <p className="font-mono text-sm font-semibold text-t1">{p.name}</p>
-                      <p className="font-mono text-[11px] text-t3">{p.subtitle}</p>
+                      <p className="text-sm font-semibold text-white">{p.name}</p>
+                      <p className="text-xs text-neutral-500">{p.subtitle}</p>
                     </div>
-                    <div className="flex gap-1">{p.badges.map(([label, color]) => <Badge key={label} color={color}>{label}</Badge>)}</div>
+                    <div className="flex gap-2">{p.badges.map(([label, color]) => <Badge key={label} color={color}>{label}</Badge>)}</div>
                   </div>
-                  <div className="px-4 sm:px-6 py-5">
-                    <p className="text-sm font-light text-t2 leading-relaxed mb-4">{p.desc}</p>
+                  <div className="px-6 py-6">
+                    <p className="text-sm text-neutral-400 leading-relaxed mb-5">{p.desc}</p>
                     <div className="flex flex-wrap gap-2">
                       {p.links.map((l) => (
                         <a key={l.label} href={l.url} target="_blank" rel="noopener noreferrer"
-                          className="font-mono text-[11px] font-medium tracking-wider uppercase px-4 py-2 border border-border bg-bg text-t2 hover:text-t1 hover:bg-surface transition-colors">
+                          className="rounded-full text-xs font-medium tracking-wider uppercase px-5 py-2.5 border border-neutral-700 text-neutral-400 hover:text-white hover:border-neutral-500 transition-colors">
                           {l.label}
                         </a>
                       ))}
@@ -346,9 +348,9 @@ export default function Home() {
             </div>
 
             {/* Challenge callout */}
-            <div className="mt-6 border-l-2 border-lime bg-black border border-border p-6 relative">
-              <p className="absolute -top-2.5 left-4 font-mono text-[10px] font-semibold tracking-widest text-lime bg-bg px-2 uppercase">Open Challenge</p>
-              <p className="text-[15px] font-light text-t2 leading-relaxed italic">
+            <div className="mt-6 rounded-2xl bg-[#0a0a0a] border border-emerald-500/20 p-6 relative">
+              <span className="absolute -top-2.5 left-5 text-[10px] font-semibold tracking-widest text-emerald-400 bg-[#0F0F0F] px-2 uppercase">Open Challenge</span>
+              <p className="text-[15px] text-neutral-400 leading-relaxed italic">
                 Give me a race sim title on Steam — I&apos;ll build the entire data pipeline, storage, API layer, realtime overlay, and fullstack React app from scratch.
               </p>
             </div>
@@ -356,9 +358,19 @@ export default function Home() {
         </section>
 
         {/* ── Footer ── */}
-        <footer className="py-12 text-center font-mono text-[11px] tracking-wider text-t4">
-          Built by{" "}
-          <a href="https://github.com/dougwithseismic" target="_blank" rel="noopener noreferrer" className="text-t3 hover:text-t1 transition-colors">dougwithseismic</a>
+        <footer className="py-16 text-center">
+          <p className="text-xs tracking-wider text-neutral-600">
+            Built by{" "}
+            <a href="https://github.com/dougwithseismic" target="_blank" rel="noopener noreferrer" className="text-neutral-400 hover:text-white transition-colors">dougwithseismic</a>
+          </p>
+          <a
+            href={API_DOCS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block mt-4 rounded-full text-xs font-medium tracking-wider uppercase px-6 py-2.5 border border-neutral-700 text-neutral-400 hover:text-white hover:border-neutral-500 transition-colors"
+          >
+            API Documentation
+          </a>
         </footer>
       </div>
     </main>

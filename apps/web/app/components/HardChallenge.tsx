@@ -42,33 +42,33 @@ export function HardChallenge() {
   ];
 
   return (
-    <div className="pb-px">
+    <div className="space-y-4">
       {/* Pipeline */}
-      <div className="border border-border bg-bg">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-border">
-          <span className="font-mono text-xs font-semibold tracking-wider uppercase text-t2">Telemetry Pipeline</span>
-          <div className="flex gap-1">
+      <div className="rounded-2xl border border-neutral-800/50 bg-[#111] overflow-hidden">
+        <div className="flex items-center justify-between px-6 py-5 border-b border-neutral-800/50">
+          <span className="text-sm font-medium text-neutral-300">Telemetry Pipeline</span>
+          <div className="flex gap-2">
             {step === 2 ? (
-              <button onClick={() => { setStep(0); setLaps(null); setAnalysis(null); setRawData(null); }} className="font-mono text-[11px] font-medium tracking-wider uppercase px-4 py-2 border border-border bg-bg text-t2 hover:text-t1 transition-colors">Reset</button>
+              <button onClick={() => { setStep(0); setLaps(null); setAnalysis(null); setRawData(null); }} className="rounded-full text-xs font-medium tracking-wider uppercase px-5 py-2.5 border border-neutral-700 text-neutral-400 hover:text-white transition-colors">Reset</button>
             ) : step === 0 && !rawData ? (
               <>
-                <button onClick={run} disabled={loading} className="font-mono text-[11px] font-medium tracking-wider uppercase px-4 py-2 border border-lime bg-lime text-black hover:bg-[#00dd00] transition-colors disabled:opacity-50">{loading ? "Processing..." : "Run Full Pipeline"}</button>
-                <button onClick={advance} disabled={loading} className="font-mono text-[11px] font-medium tracking-wider uppercase px-4 py-2 border border-border bg-bg text-t2 hover:text-t1 transition-colors">Step →</button>
+                <button onClick={run} disabled={loading} className="rounded-full text-xs font-medium tracking-wider uppercase px-5 py-2.5 bg-white text-black hover:bg-neutral-200 transition-colors disabled:opacity-50">{loading ? "Processing..." : "Run Full Pipeline"}</button>
+                <button onClick={advance} disabled={loading} className="rounded-full text-xs font-medium tracking-wider uppercase px-5 py-2.5 border border-neutral-700 text-neutral-400 hover:text-white transition-colors">Step →</button>
               </>
             ) : (
-              <button onClick={advance} disabled={loading} className="font-mono text-[11px] font-medium tracking-wider uppercase px-4 py-2 border border-lime bg-lime text-black hover:bg-[#00dd00] transition-colors disabled:opacity-50">{loading ? "Processing..." : "Next Step →"}</button>
+              <button onClick={advance} disabled={loading} className="rounded-full text-xs font-medium tracking-wider uppercase px-5 py-2.5 bg-white text-black hover:bg-neutral-200 transition-colors disabled:opacity-50">{loading ? "Processing..." : "Next Step →"}</button>
             )}
           </div>
         </div>
         <div className="px-6 py-5">
           {steps.map((s, i) => (
-            <div key={i} className="flex gap-4 items-start py-3 border-b border-border last:border-b-0">
-              <div className={`w-7 h-7 flex items-center justify-center font-mono text-xs font-semibold shrink-0 ${i < step ? "border border-lime bg-lime text-black" : i === step ? "border border-lime text-lime" : "border border-border text-t4"}`}>
+            <div key={i} className="flex gap-4 items-start py-3.5 border-b border-neutral-800/30 last:border-b-0">
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-semibold shrink-0 transition-colors ${i < step ? "bg-emerald-500 text-black" : i === step ? "border-2 border-emerald-500 text-emerald-400" : "border border-neutral-700 text-neutral-600"}`}>
                 {i < step ? "✓" : i + 1}
               </div>
               <div>
-                <p className={`font-mono text-[13px] font-medium mb-0.5 ${i === step ? "text-t1" : "text-t4"}`}>{s.title}</p>
-                <p className="text-sm text-t3">{s.desc}</p>
+                <p className={`font-mono text-[13px] font-medium mb-0.5 ${i === step ? "text-white" : "text-neutral-500"}`}>{s.title}</p>
+                <p className="text-sm text-neutral-500">{s.desc}</p>
               </div>
             </div>
           ))}
@@ -77,20 +77,20 @@ export function HardChallenge() {
 
       {/* Edge cases */}
       {step === 0 && (
-        <div className="border border-border border-t-0 bg-bg">
-          <div className="flex items-center justify-between px-6 py-4 border-b border-border">
-            <span className="font-mono text-xs font-semibold tracking-wider uppercase text-t2">Edge cases</span>
+        <div className="rounded-2xl border border-neutral-800/50 bg-[#111] overflow-hidden">
+          <div className="px-6 py-5 border-b border-neutral-800/50">
+            <span className="text-sm font-medium text-neutral-300">Edge cases</span>
           </div>
           <div className="px-6 py-5">
             {rawData && (
-              <div className="grid grid-cols-2 gap-px bg-border border border-border mb-4">
-                <div className="bg-bg px-5 py-4 text-center">
-                  <p className="font-mono text-xl font-semibold tabular-nums mb-1">{rawData.frames}</p>
-                  <p className="font-mono text-[10px] tracking-widest uppercase text-t4">Raw Frames</p>
+              <div className="grid grid-cols-2 gap-3 mb-5">
+                <div className="bg-[#0a0a0a] rounded-xl px-5 py-4 text-center">
+                  <p className="font-mono text-xl font-semibold tabular-nums mb-1 text-white">{rawData.frames}</p>
+                  <p className="text-[10px] font-medium tracking-widest uppercase text-neutral-600">Raw Frames</p>
                 </div>
-                <div className="bg-bg px-5 py-4 text-center">
-                  <p className="font-mono text-xl font-semibold tabular-nums mb-1 text-t3">{rawData.source}</p>
-                  <p className="font-mono text-[10px] tracking-widest uppercase text-t4">Source</p>
+                <div className="bg-[#0a0a0a] rounded-xl px-5 py-4 text-center">
+                  <p className="font-mono text-xl font-semibold tabular-nums mb-1 text-neutral-400">{rawData.source}</p>
+                  <p className="text-[10px] font-medium tracking-widest uppercase text-neutral-600">Source</p>
                 </div>
               </div>
             )}
@@ -99,9 +99,9 @@ export function HardChallenge() {
               ["Lap 4 (incomplete)", "only S1 frames, never reaches S3."],
               ["Stationary frames", "speed < 5 kph, unchanged position."],
             ].map(([title, desc]) => (
-              <div key={title} className="flex gap-3 items-start py-3 border-b border-border last:border-b-0">
-                <span className="font-mono text-[9px] font-semibold tracking-wider text-danger border border-danger/20 bg-danger-dim px-1.5 py-0.5 shrink-0 uppercase">Skip</span>
-                <p className="text-sm text-t3"><strong className="text-t2 font-medium">{title}</strong> — {desc}</p>
+              <div key={title} className="flex gap-3 items-start py-3 border-b border-neutral-800/30 last:border-b-0">
+                <span className="rounded-full text-[9px] font-semibold tracking-wider text-red-400 border border-red-500/20 bg-red-500/10 px-2.5 py-0.5 shrink-0 uppercase">Skip</span>
+                <p className="text-sm text-neutral-500"><strong className="text-neutral-300 font-medium">{title}</strong> — {desc}</p>
               </div>
             ))}
           </div>
@@ -110,35 +110,35 @@ export function HardChallenge() {
 
       {/* Laps */}
       {step >= 1 && laps && (
-        <div className="border border-border border-t-0 bg-bg">
-          <div className="flex items-center justify-between px-6 py-4 border-b border-border">
-            <span className="font-mono text-xs font-semibold tracking-wider uppercase text-t2">Lap summaries</span>
-            <span className="font-mono text-[10px] font-semibold tracking-widest uppercase px-2.5 py-1 border text-lime border-lime/20 bg-lime-dim">{laps.length} Complete</span>
+        <div className="rounded-2xl border border-neutral-800/50 bg-[#111] overflow-hidden">
+          <div className="flex items-center justify-between px-6 py-5 border-b border-neutral-800/50">
+            <span className="text-sm font-medium text-neutral-300">Lap summaries</span>
+            <span className="rounded-full text-[10px] font-semibold tracking-wider uppercase px-3 py-1 border border-emerald-500/20 bg-emerald-500/10 text-emerald-400">{laps.length} Complete</span>
           </div>
           <div className="overflow-x-auto">
-            <table className="w-full font-mono text-[13px] border-collapse min-w-[600px]">
+            <table className="w-full text-[13px] border-collapse min-w-[600px]">
               <thead>
                 <tr>
                   {["Lap", "Time", "S1", "S2", "S3", "Avg Spd", "Max Spd"].map((h, i) => (
-                    <th key={h} className={`${i > 0 ? "text-right" : "text-left"} px-6 py-3 text-[10px] font-semibold tracking-widest uppercase text-t4 border-b border-border`}>{h}</th>
+                    <th key={h} className={`${i > 0 ? "text-right" : "text-left"} px-6 py-3.5 text-[10px] font-semibold tracking-widest uppercase text-neutral-600 border-b border-neutral-800/50`}>{h}</th>
                   ))}
                 </tr>
               </thead>
-              <tbody className="text-t2">
+              <tbody className="text-neutral-400">
                 {laps.map((lap) => {
                   const isBest = analysis && lap.lapNumber === analysis.bestLap.lapNumber;
                   const isWorst = analysis && lap.lapNumber === analysis.worstLap.lapNumber;
                   return (
-                    <tr key={lap.lapNumber}>
-                      <td className="px-6 py-3 border-b border-border">
-                        {lap.lapNumber}
-                        {isBest && <span className="ml-2 font-mono text-[10px] font-semibold tracking-widest uppercase px-2 py-0.5 border text-lime border-lime/20 bg-lime-dim">Best</span>}
-                        {isWorst && <span className="ml-2 font-mono text-[10px] font-semibold tracking-widest uppercase px-2 py-0.5 border text-danger border-danger/20 bg-danger-dim">Worst</span>}
+                    <tr key={lap.lapNumber} className="hover:bg-neutral-800/20 transition-colors">
+                      <td className="px-6 py-3.5 border-b border-neutral-800/30">
+                        <span className="font-medium text-neutral-300">{lap.lapNumber}</span>
+                        {isBest && <span className="ml-2 rounded-full text-[10px] font-semibold tracking-wider uppercase px-2.5 py-0.5 border border-emerald-500/20 bg-emerald-500/10 text-emerald-400">Best</span>}
+                        {isWorst && <span className="ml-2 rounded-full text-[10px] font-semibold tracking-wider uppercase px-2.5 py-0.5 border border-red-500/20 bg-red-500/10 text-red-400">Worst</span>}
                       </td>
-                      <td className={`text-right px-6 py-3 border-b border-border tabular-nums ${isBest ? "text-lime" : isWorst ? "text-danger" : ""}`}>{lap.lapTime.toFixed(3)}s</td>
-                      {lap.sectors.map((s) => <td key={s.sector} className="text-right px-6 py-3 border-b border-border tabular-nums">{s.time.toFixed(3)}s</td>)}
-                      <td className="text-right px-6 py-3 border-b border-border tabular-nums">{lap.avgSpeed} kph</td>
-                      <td className="text-right px-6 py-3 border-b border-border tabular-nums">{lap.maxSpeed} kph</td>
+                      <td className={`text-right px-6 py-3.5 border-b border-neutral-800/30 font-mono tabular-nums ${isBest ? "text-emerald-400" : isWorst ? "text-red-400" : ""}`}>{lap.lapTime.toFixed(3)}s</td>
+                      {lap.sectors.map((s) => <td key={s.sector} className="text-right px-6 py-3.5 border-b border-neutral-800/30 font-mono tabular-nums">{s.time.toFixed(3)}s</td>)}
+                      <td className="text-right px-6 py-3.5 border-b border-neutral-800/30 font-mono tabular-nums">{lap.avgSpeed} kph</td>
+                      <td className="text-right px-6 py-3.5 border-b border-neutral-800/30 font-mono tabular-nums">{lap.maxSpeed} kph</td>
                     </tr>
                   );
                 })}
@@ -150,28 +150,28 @@ export function HardChallenge() {
 
       {/* Analysis */}
       {step === 2 && analysis && (
-        <div className="border border-border border-t-0 bg-bg">
-          <div className="flex items-center justify-between px-6 py-4 border-b border-border">
-            <span className="font-mono text-xs font-semibold tracking-wider uppercase text-t2">Coaching analysis</span>
-            <span className="font-mono text-[10px] font-semibold tracking-widest uppercase px-2.5 py-1 border text-warn border-warn/20 bg-warn-dim">{analysis.issue.replace("_", " ")}</span>
+        <div className="rounded-2xl border border-neutral-800/50 bg-[#111] overflow-hidden">
+          <div className="flex items-center justify-between px-6 py-5 border-b border-neutral-800/50">
+            <span className="text-sm font-medium text-neutral-300">Coaching analysis</span>
+            <span className="rounded-full text-[10px] font-semibold tracking-wider uppercase px-3 py-1 border border-amber-500/20 bg-amber-500/10 text-amber-400">{analysis.issue.replace("_", " ")}</span>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-border">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-neutral-800/30">
             {[
-              { v: `Lap ${analysis.bestLap.lapNumber}`, l: "Best Lap", c: "text-lime" },
-              { v: `Lap ${analysis.worstLap.lapNumber}`, l: "Worst Lap", c: "text-danger" },
-              { v: `+${analysis.worstLap.delta.toFixed(3)}s`, l: "Delta", c: "text-danger" },
-              { v: `S${analysis.problemSector}`, l: "Problem Sector", c: "text-warn" },
+              { v: `Lap ${analysis.bestLap.lapNumber}`, l: "Best Lap", c: "text-emerald-400" },
+              { v: `Lap ${analysis.worstLap.lapNumber}`, l: "Worst Lap", c: "text-red-400" },
+              { v: `+${analysis.worstLap.delta.toFixed(3)}s`, l: "Delta", c: "text-red-400" },
+              { v: `S${analysis.problemSector}`, l: "Problem Sector", c: "text-amber-400" },
             ].map((s) => (
-              <div key={s.l} className="bg-bg px-5 py-4 text-center">
+              <div key={s.l} className="bg-[#111] px-5 py-5 text-center">
                 <p className={`font-mono text-xl font-semibold tabular-nums mb-1 ${s.c}`}>{s.v}</p>
-                <p className="font-mono text-[10px] tracking-widest uppercase text-t4">{s.l}</p>
+                <p className="text-[10px] font-medium tracking-widest uppercase text-neutral-600">{s.l}</p>
               </div>
             ))}
           </div>
-          <div className="p-5">
-            <div className="p-5 bg-black border border-border border-l-2 border-l-lime relative italic text-sm font-light text-t2 leading-relaxed">
-              <span className="absolute -top-2.5 left-4 font-mono text-[10px] font-semibold tracking-widest text-lime bg-bg px-2 not-italic uppercase">PitGPT</span>
-              {analysis.coachingMessage}
+          <div className="p-6">
+            <div className="p-5 bg-[#0a0a0a] rounded-xl border border-emerald-500/20 relative">
+              <span className="absolute -top-2.5 left-4 text-[10px] font-semibold tracking-widest text-emerald-400 bg-[#111] px-2 uppercase">PitGPT</span>
+              <p className="italic text-sm text-neutral-400 leading-relaxed">{analysis.coachingMessage}</p>
             </div>
           </div>
         </div>
