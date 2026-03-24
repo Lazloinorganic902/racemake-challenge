@@ -36,7 +36,7 @@ COPY packages/typescript-config/ ./packages/typescript-config/
 COPY apps/api/ ./apps/api/
 
 # Install tsx globally for TypeScript execution
-RUN corepack enable && pnpm add -g tsx
+RUN npm install -g tsx
 
 ENV PORT=3000
 EXPOSE 3000
