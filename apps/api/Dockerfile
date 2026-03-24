@@ -9,8 +9,8 @@ COPY turbo.json ./
 COPY packages/ packages/
 COPY apps/api/ apps/api/
 
-# Install pnpm and dependencies
-RUN npm install -g pnpm@9 && pnpm install --frozen-lockfile
+# Bun can install from pnpm lockfiles directly
+RUN bun install --frozen-lockfile
 
 # Expose port
 ENV PORT=3000
