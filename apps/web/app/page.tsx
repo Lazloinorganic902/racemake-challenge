@@ -212,10 +212,114 @@ export default function Home() {
                 </div>
               ))}
             </ContentGrid>
+
+            {/* ── Wire Format Deep Dive ── */}
+            <div className="mt-6 space-y-4">
+              {/* How it works */}
+              <div className="rounded-2xl border border-neutral-800/50 bg-[#111] overflow-hidden">
+                <CardHeader title="How the Binary Codec Works" badge={<Badge color="warn">Deep Dive</Badge>} />
+                <div className="p-6 space-y-5">
+                  <p className="text-sm text-neutral-400 leading-relaxed">
+                    A telemetry frame has 13 fields — timestamp, lap, position, speed, throttle, brake, steering, gear, RPM, and 4 tyre temperatures. In JSON, each frame carries field names as strings, quotes, braces, and decimal formatting overhead. That costs ~131 bytes per frame. At 120Hz with 20 cars on track, you&apos;re pushing nearly 600 KB/s just in telemetry — before any other traffic.
+                  </p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-neutral-800/30 rounded-xl overflow-hidden">
+                    <div className="bg-[#0a0a0a] p-5">
+                      <p className="text-[11px] font-semibold tracking-wider uppercase text-amber-400 mb-3">v1 — Fixed Binary (19 bytes)</p>
+                      <p className="text-sm text-neutral-500 leading-relaxed mb-3">
+                        Every field gets a fixed slot in a packed binary buffer. No field names, no delimiters, no whitespace. Position is quantized as a uint16 (0.0–1.0 scaled to 0–10000), throttle and brake as uint8 (0–255), steering as int8 (-127 to 127). Tyre temps are already integers. The schema defines exactly which byte offset maps to which field — the two-way map.
+                      </p>
+                      <p className="font-mono text-[11px] text-neutral-600">ts(4) lap(1) pos(2) spd(2) thr(1) brk(1) str(1) gear(1) rpm(2) tyres(4) = 19B</p>
+                    </div>
+                    <div className="bg-[#0a0a0a] p-5">
+                      <p className="text-[11px] font-semibold tracking-wider uppercase text-emerald-400 mb-3">v2 — Delta Encoded (~6 bytes avg)</p>
+                      <p className="text-sm text-neutral-500 leading-relaxed mb-3">
+                        At 120Hz, consecutive frames are nearly identical — maybe speed changed by 1 km/h and position advanced slightly. Delta encoding sends one full base frame, then for each subsequent frame only transmits a 2-byte bitmask (which of the 13 fields changed) plus the changed field values. On typical straight-line data, only 3–4 fields change per frame.
+                      </p>
+                      <p className="font-mono text-[11px] text-neutral-600">bitmask(2) + changed_fields_only → avg ~6B vs 19B full</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Alternatives comparison */}
+              <div className="rounded-2xl border border-neutral-800/50 bg-[#111] overflow-hidden">
+                <CardHeader title="Alternatives & Trade-offs" badge={<Badge color="info">Comparison</Badge>} />
+                <div className="overflow-x-auto">
+                  <table className="w-full text-[13px] border-collapse min-w-[640px]">
+                    <thead>
+                      <tr>
+                        {["Format", "Size / Frame", "Schema Evolution", "Latency", "Trade-off"].map((h) => (
+                          <th key={h} className="text-left px-6 py-3.5 text-[10px] font-semibold tracking-widest uppercase text-neutral-600 border-b border-neutral-800/50">{h}</th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody className="text-neutral-400">
+                      {[
+                        { fmt: "JSON", size: "~131B", schema: "Implicit — rename a field and consumers break", latency: "Parse overhead per frame", trade: "Human-readable, zero setup cost. Fine for debugging, bad for hot paths." },
+                        { fmt: "Protobuf", size: "~25–30B", schema: "Excellent — field numbers decouple name from wire", latency: "Fast (compiled codegen)", trade: "Industry standard. Requires .proto files + codegen step. RACEMAKE uses this in prod." },
+                        { fmt: "FlatBuffers", size: "~20–28B", schema: "Good — schema-driven with vtables", latency: "Zero-copy read (fastest)", trade: "No deserialization cost at read. But larger on the wire than hand-packed, and the schema tooling is heavier." },
+                        { fmt: "MessagePack", size: "~80–90B", schema: "None — same as JSON but binary", latency: "Fast pack/unpack", trade: "Drop-in JSON replacement. Saves ~30% on names, but still self-describing so can't compete with schema-driven formats." },
+                        { fmt: "Cap'n Proto", size: "~24–32B", schema: "Excellent — zero-copy, schema versioned", latency: "Zero-copy (like FlatBuffers)", trade: "Fastest reads, but larger wire size due to alignment padding. Less tooling ecosystem than Protobuf." },
+                        { fmt: "Custom Binary", size: "19B (v1)", schema: "Manual — schema registry maps versions to layouts", latency: "Minimal (direct DataView)", trade: "Smallest possible wire size. Full control over quantization. But you own the schema tooling." },
+                        { fmt: "Custom + Delta", size: "~6B (v2 avg)", schema: "Same registry + bitmask header", latency: "Requires previous frame state", trade: "Best compression by far. Adds statefulness — needs keyframes for random access and recovery." },
+                      ].map((r) => (
+                        <tr key={r.fmt} className="hover:bg-neutral-800/20 transition-colors">
+                          <td className="px-6 py-3.5 border-b border-neutral-800/30 text-white font-medium whitespace-nowrap">{r.fmt}</td>
+                          <td className="px-6 py-3.5 border-b border-neutral-800/30 font-mono text-[12px] whitespace-nowrap">{r.size}</td>
+                          <td className="px-6 py-3.5 border-b border-neutral-800/30">{r.schema}</td>
+                          <td className="px-6 py-3.5 border-b border-neutral-800/30 whitespace-nowrap">{r.latency}</td>
+                          <td className="px-6 py-3.5 border-b border-neutral-800/30 text-neutral-500">{r.trade}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* Why custom */}
+              <div className="rounded-2xl border border-neutral-800/50 bg-[#111] overflow-hidden">
+                <CardHeader title="Why Build a Custom Codec" />
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-neutral-800/30">
+                  <div className="bg-[#111] p-6">
+                    <p className="text-[11px] font-semibold tracking-wider uppercase text-neutral-400 mb-2">Show the Principles</p>
+                    <p className="text-sm text-neutral-500 leading-relaxed">In production you&apos;d use Protobuf — RACEMAKE already does. This codec exists to demonstrate the underlying concepts: fixed-point quantization, schema versioning, delta encoding, and bidirectional encode/decode. The same principles apply regardless of the format you choose.</p>
+                  </div>
+                  <div className="bg-[#111] p-6">
+                    <p className="text-[11px] font-semibold tracking-wider uppercase text-neutral-400 mb-2">Quantization Precision</p>
+                    <p className="text-sm text-neutral-500 leading-relaxed">Position quantized to 0.0001 (uint16 / 10000), throttle to 0.004 (uint8 / 255), steering to 0.008 (int8 / 127). These are all below the noise floor of real sensors — the quantization error is smaller than measurement jitter, so no meaningful data is lost.</p>
+                  </div>
+                  <div className="bg-[#111] p-6">
+                    <p className="text-[11px] font-semibold tracking-wider uppercase text-neutral-400 mb-2">Delta Encoding Trade-off</p>
+                    <p className="text-sm text-neutral-500 leading-relaxed">Delta encoding gives the best compression but introduces state: you need the previous frame to decode the current one. In practice this means sending periodic keyframes (full frames) so consumers can recover from dropped packets or join mid-stream — the same pattern as video I-frames.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* SSE Streaming Explainer */}
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-8 pt-6">
+            <div className="rounded-2xl border border-neutral-800/50 bg-[#111] overflow-hidden mb-4">
+              <CardHeader title="SSE vs WebSocket vs Polling" badge={<Badge color="lime">Streaming</Badge>} />
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-neutral-800/30">
+                <div className="bg-[#111] p-6">
+                  <p className="text-[11px] font-semibold tracking-wider uppercase text-emerald-400 mb-2">SSE (Used Here)</p>
+                  <p className="text-sm text-neutral-500 leading-relaxed">Server-to-client only, built on HTTP. Auto-reconnect, event types, last-event-ID recovery. Perfect for telemetry where data flows one direction. Works through proxies and CDNs without special config.</p>
+                </div>
+                <div className="bg-[#111] p-6">
+                  <p className="text-[11px] font-semibold tracking-wider uppercase text-neutral-400 mb-2">WebSocket</p>
+                  <p className="text-sm text-neutral-500 leading-relaxed">Full-duplex, lowest latency. Better when the client also sends data (driver inputs, pit commands). Requires sticky sessions or a connection broker at scale. In production with 20+ cars, you&apos;d likely use WebSocket for the ingestion side.</p>
+                </div>
+                <div className="bg-[#111] p-6">
+                  <p className="text-[11px] font-semibold tracking-wider uppercase text-neutral-400 mb-2">Long Polling</p>
+                  <p className="text-sm text-neutral-500 leading-relaxed">Simplest fallback. Client polls, server holds the connection until new data arrives. No connection upgrade needed. High overhead per-request — unusable at 120Hz, but fine as a degraded mode for intermittent coaching updates.</p>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Live SSE Stream */}
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-8 pt-6">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-8">
             <IrlStream streamUrl={streamUrl} />
           </div>
 
